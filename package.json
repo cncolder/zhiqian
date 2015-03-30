@@ -1,0 +1,71 @@
+{
+    "apps": [
+        {
+            "env": {
+                "MONGOOSE_DISABLE_STABILITY_WARNING": 1,
+                "MONGO_URL": "mongodb://127.0.0.1:27017/zhiqian?auto_reconnect=true"
+            },
+            "env_dev": {
+                "NODE_ENV": "development",
+                "PORT": 3000
+            },
+            "env_production": {
+                "NODE_ENV": "production",
+                "PORT": 80
+            },
+            "ignoreWatch": [
+                "[\\/\\\\]\\./",
+                "node_modules"
+            ],
+            "instances": "1",
+            "name": "zhiqian",
+            "node_args": "--harmony",
+            "script": ".",
+            "watch": false
+        }
+    ],
+    "author": "colder",
+    "bugs": {
+        "url": "https://github.com/cncolder/zhiqian/issues"
+    },
+    "dependencies": {
+        "koa": "^0.18.1",
+        "koa-json": "^1.1.1",
+        "koa-router": "^4.2.0",
+        "koa-views": "^3.0.0",
+        "mustache": "^2.0.0",
+        "mz": "^1.3.0"
+    },
+    "deploy": {
+        "production": {
+            "host": "zhiqiantonghua.com",
+            "path": "/home/colder/zhiqiantonghua.com",
+            "post-deploy": "npm i --production && pm2 startOrRestart package.json --env production",
+            "ref": "origin/master",
+            "repo": "https://www.github.com/cncolder/zhiqian.git",
+            "user": "root"
+        }
+    },
+    "description": "ZhiQian website",
+    "devDependencies": {
+        "gulp": "^3.8.11",
+        "pm2": "^0.12.9"
+    },
+    "engines": {
+        "node": "0.12.x",
+        "npm": "2.5.x"
+    },
+    "homepage": "https://github.com/cncolder/zhiqian",
+    "license": "MIT",
+    "name": "zhiqian",
+    "private": true,
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/cncolder/zhiqian.git"
+    },
+    "scripts": {
+        "start": "node --harmony .",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "version": "1.0.0"
+}

@@ -1,0 +1,28 @@
+{
+    "browser": true,
+    "browserify": true,
+    "esnext": true,
+    "freeze": true,
+    "globals": {
+        "Promise": true,
+        "Ractive": true,
+        "alert": true,
+        "freewall": true,
+        "io": true,
+        "locale": true,
+        "mongoose": true
+    },
+    "indent": 2,
+    "jquery": true,
+    "latedef": "nofunc",
+    "maxdepth": 3,
+    "maxlen": 100,
+    "maxparams": 4,
+    "mocha": true,
+    "newcap": true,
+    "node": true,
+    "noyield": true,
+    "quotmark": "single",
+    "undef": true,
+    "unused": true
+}
