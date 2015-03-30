@@ -38,11 +38,11 @@
     },
     "deploy": {
         "production": {
-            "host": "zhiqiantonghua.com",
-            "path": "/home/colder/zhiqiantonghua.com",
+            "host": "haoduotongshu.com",
+            "path": "/home/colder/haoduotongshu.com",
             "post-deploy": "npm i --production && pm2 startOrRestart package.json --env production",
             "ref": "origin/master",
-            "repo": "https://www.github.com/cncolder/zhiqian.git",
+            "repo": "https://github.com/cncolder/zhiqian.git",
             "user": "root"
         }
     },
