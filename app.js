@@ -40,6 +40,9 @@ app
       partials: {
         head: 'head',
         nav: 'nav',
+        slide: 'slide',
+        main: 'main',
+        footer: 'footer',
         script: 'script'
       }
     });
