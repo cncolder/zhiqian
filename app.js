@@ -1,6 +1,13 @@
 var koa = require('koa');
 var app = koa();
 
+// static file
+
+var stat = require('koa-static');
+app.use(stat('public', {
+  maxage: 0
+}));
+
 // view renderer
 
 var views = require('koa-views');
@@ -40,8 +47,6 @@ app
       partials: {
         head: 'head',
         nav: 'nav',
-        slide: 'slide',
-        main: 'main',
         footer: 'footer',
         script: 'script'
       }
@@ -51,15 +56,12 @@ app
     this.type = 'js';
     this.body = yield require('mz/fs').readFile('./views/index.js');
   })
-  .get('/index.css', function * () {
-    this.type = 'css';
-    this.body = yield require('mz/fs').readFile('./views/index.css');
-  })
   .get('/poll', function * () {
     yield this.render('poll', {
       partials: {
         head: 'head',
         nav: 'nav',
+        footer: 'footer',
         script: 'script'
       }
     });
