@@ -17,7 +17,7 @@
                 "[\\/\\\\]\\./",
                 "node_modules"
             ],
-            "instances": "1",
+            "instances": "0",
             "name": "zhiqian",
             "node_args": "--harmony",
             "script": ".",
@@ -49,12 +49,15 @@
     },
     "description": "ZhiQian website",
     "devDependencies": {
+        "browserify": "^9.0.4",
         "gulp": "^3.8.11",
         "gulp-autoprefixer": "^2.1.0",
         "gulp-concat": "^2.5.2",
         "gulp-less": "^3.0.2",
+        "gulp-sourcemaps": "^1.5.1",
         "gulp-util": "^3.0.4",
-        "pm2": "^0.12.9"
+        "pm2": "^0.12.9",
+        "vinyl-transform": "^1.0.0"
     },
     "engines": {
         "node": "0.12.x",

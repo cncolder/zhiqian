@@ -39,8 +39,8 @@ var router = require('koa-router');
 app
   .use(router(app))
   .get('/', function * () {
-    this.locals = {
-      title: '知谦'
+    this.state = {
+      title: '好多童书 - 知谦文化传播'
     };
 
     yield this.render('index', {
@@ -52,17 +52,13 @@ app
       }
     });
   })
-  .get('/index.js', function * () {
-    this.type = 'js';
-    this.body = yield require('mz/fs').readFile('./views/index.js');
-  })
-  .get('/poll', function * () {
-    yield this.render('poll', {
+  .get('/poll/outlets', function * () {
+    yield this.render('poll/outlets', {
       partials: {
-        head: 'head',
-        nav: 'nav',
-        footer: 'footer',
-        script: 'script'
+        head: '../head',
+        nav: '../nav',
+        footer: '../footer',
+        script: '../script'
       }
     });
   });

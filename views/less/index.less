@@ -1,12 +1,12 @@
 @import "bootstrap/bootstrap";
+@import (inline) "../css/animate.css";
 
 /* GLOBAL STYLES
 -------------------------------------------------- */
-/* Padding below the footer and lighter body text */
 
 body {
-  padding-bottom: 40px;
-  color: #5a5a5a;
+  // padding-bottom: 40px;
+  // color: #5a5a5a;
 }
 
 
@@ -21,8 +21,7 @@ body {
 @navbar-default-link-hover-color: rgb(255,234,0);
 @navbar-default-link-active-color: rgb(255,234,0);
 
-/* Special class on .container surrounding .navbar, used for positioning it into place. */
-.navbar-wrapper {
+// .navbar-wrapper {
   
   /* Flip around the padding for proper display in narrow viewports */
   & > .container {
@@ -35,29 +34,18 @@ body {
     // padding-left: 15px;
     
     .container {
-      width: auto;
+      // width: auto;
     }
     
     .navbar-brand {
-      padding: 0px;
-      margin: 0px 100px;
+      padding-top: 12px;
       
       img {
-        margin: 12px 0px;
+        // margin: 12px 0px;
       }
     }
-    
-    // .narbar-nav {
-    //   > li {
-    //     + li:before {
-    //       content: "@{breadcrumb-separator}\00a0"; // Unicode space added since inline-block means non-collapsing white-space
-    //       padding: 0 5px;
-    //       color: @breadcrumb-color;
-    //     }
-    //   }
-    // }
   }
-}
+// }
 
 
 /* CUSTOMIZE THE CAROUSEL
@@ -96,82 +84,59 @@ body {
 -------------------------------------------------- */
 
 .poster {
-  img {
-    width: 100%;
+  ul {
+    li {
+      margin-right: 3em;
+
+      img {
+        // width: 50%;
+      }
+    }
   }
 }
 
 
-/* MARKETING CONTENT
+/* NEWS
 -------------------------------------------------- */
 
-/* Center align the text within the three columns below the carousel */
-.marketing {
-  .col-lg-4 {
-    margin-bottom: 20px;
-    text-align: center;
+.news {
+  .row {
+    // margin: 50px 0px;
+  }
+
+  .title {
+    margin: 30px 0px;
+  }
+}
+
+
+/* FOOTER
+-------------------------------------------------- */
+
+.footer {
+  background-color: rgb(137,177,211);
+  
+  .container {
     
-    p {
-      margin-right: 10px;
-      margin-left: 10px;
-    }
   }
   
-  h2 {
-    font-weight: normal;
+  .row {
+    margin: 0px;
+    height: 94px;
+    color: white;
+    // background-color: rgb(137,177,211);
   }
 }
 
 
-/* Featurettes
-------------------------- */
-
-.featurette-divider {
-  margin: 80px 0; /* Space out the Bootstrap <hr> more */
-}
-
-/* Thin out the marketing headings */
-.featurette-heading {
-  font-weight: 300;
-  line-height: 1;
-  letter-spacing: -1px;
-}
-
-
-/* RESPONSIVE CSS
+/* RESPONSIVE
 -------------------------------------------------- */
 
+@media (min-width: 320px) {
+}
+
 @media (min-width: 768px) {
-  /* Navbar positioning foo */
-  .navbar-wrapper {
-    // margin-top: 20px;
-    
-    .container {
-      // padding-right: 15px;
-      // padding-left: 15px;
-    }
-    
-    .navbar {
-      // padding-right: 0;
-      // padding-left: 0;
-      // border-radius: 4px; /* The navbar becomes detached from the top, so we round the corners */
-    }
-  }
-
-  /* Bump up size of carousel content */
-  .carousel-caption p {
-    margin-bottom: 20px;
-    font-size: 21px;
-    line-height: 1.4;
-  }
-
-  .featurette-heading {
-    font-size: 50px;
-  }
 }
 
 @media (min-width: 992px) {
-  .featurette-heading {
-    margin-top: 120px;
-  }
 }

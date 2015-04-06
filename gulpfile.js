@@ -1,20 +1,21 @@
 var child = require('child_process');
 var gulp = require('gulp');
 var gutil = require('gulp-util');
-// var buffer = require('vinyl-buffer');
-// var source = require('vinyl-source-stream');
 var concat = require('gulp-concat');
 var less = require('gulp-less');
 var prefix = require('gulp-autoprefixer');
-// var browserify = require('browserify');
-// var sourcemaps = require('gulp-sourcemaps');
+var browserify = require('browserify');
+var transform = require('vinyl-transform');
+var sourcemaps = require('gulp-sourcemaps');
 
 gulp.task('default', ['pm2:start', 'pm2:logs', 'watch']);
 
 gulp.task('watch', function() {
   gulp.watch('views/less/**/*.less', ['less']);
   gulp.watch('views/js/**/*.js', ['browserify']);
-  gulp.watch(['index.js', 'app.js', 'lib/*.js', 'models/**/*.js', 'routes/**/*.js'], ['pm2:reload']);
+  gulp.watch(
+    ['index.js', 'app.js', 'lib/*.js', 'models/**/*.js', 'routes/**/*.js'], ['pm2:reload']
+  );
   gulp.watch(['test/**/*.js', '!test/browser/*'], ['mocha']);
 });
 
@@ -33,30 +34,25 @@ gulp.task('less', function() {
 });
 
 gulp.task('browserify', function() {
-  // var b = browserify('./views/js/index.js', {
-  //   debug: true,
-  //   extensions: ['.html']
-  // });
-  //
-  // return b.bundle()
-  //   .on('error', function(err) {
-  //     gutil.log('browserify error\n', err.message);
-  //     this.emit('end');
-  //   })
-  //   // .pipe(source('app.js'))
-  //   // .pipe(buffer())
-  //   // .pipe(sourcemaps.init({
-  //   //   loadMaps: true
-  //   // }))
-  //   // .pipe(sourcemaps.write('/', {
-  //   //   sourceMappingURLPrefix: '/js'
-  //   // }))
-  //   .pipe(gulp.dest('./public/js'))
-  //   .on('end', function() {
-  //     // del(['./public/js/app.js.gz', './public/js/app.js.map.gz'], function() {
-  //     gutil.log('browserify bundled app.js');
-  //     // });
-  //   });
+  // set up the browserify instance on a task basis
+  var b = browserify({
+    debug: true
+  });
+  // transform regular node stream to gulp (buffered vinyl) stream
+  var browserified = transform(function(filename) {
+    b.add(filename);
+    return b.bundle();
+  });
+
+  return gulp.src('./views/js/index.js')
+    .pipe(browserified)
+    .pipe(sourcemaps.init({
+      loadMaps: true
+    }))
+  // .pipe(uglify())
+  .on('error', gutil.log)
+    .pipe(sourcemaps.write('./'))
+    .pipe(gulp.dest('./public/js/'));
 });
 
 gulp.task('pm2:start', function(cb) {
@@ -73,8 +69,15 @@ gulp.task('pm2:reload', function(cb) {
     .on('exit', cb);
 });
 
+gulp.task('pm2:stop', function(cb) {
+  child.spawn('pm2', ['stop', 'package.json'], {
+    stdio: 'inherit'
+  })
+    .on('exit', cb);
+});
+
 gulp.task('pm2:logs', function(cb) {
-  child.spawn('pm2', ['logs', 'wish.pe'], {
+  child.spawn('pm2', ['logs', 'zhiqian'], {
     stdio: 'inherit'
   })
     .on('exit', cb);
@@ -95,8 +98,18 @@ gulp.task('mocha', function(done) {
   }).on('close', done);
 });
 
-process.on('exit', function() {
-  child.spawnSync('pm2', ['kill'], {
+// process.on('beforeExit', function() {
+//   console.log('gulp exit');
+//   child.spawn('pm2', ['stop', 'all'], {
+//     stdio: 'inherit'
+//   });
+// });
+
+process.on('SIGINT', function() {
+  child.spawn('pm2', ['stop', 'package.json'], {
     stdio: 'inherit'
-  });
+  })
+    .on('exit', function() {
+      process.exit(0);
+    });
 });
