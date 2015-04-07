@@ -9679,6 +9679,14 @@ Copyright (c) 2015 Daniel Eden
 }
 /* GLOBAL STYLES
 -------------------------------------------------- */
+html,
+body {
+  height: 100%;
+}
+html > .main,
+body > .main {
+  min-height: 80%;
+}
 /* CUSTOMIZE THE NAVBAR
 -------------------------------------------------- */
 /* Flip around the padding for proper display in narrow viewports */
@@ -9714,6 +9722,30 @@ Copyright (c) 2015 Daniel Eden
   margin: 0px;
   height: 94px;
   color: white;
+}
+/* FOOTER
+-------------------------------------------------- */
+.poll .row {
+  margin-top: 1em;
+}
+.poll .thumbnail .label-default,
+.poll .thumbnail .badge {
+  background-color: rgba(119, 119, 119, 0.5);
+  position: absolute;
+}
+.poll .thumbnail .badge {
+  top: .5em;
+}
+.poll .thumbnail .name {
+  left: 1.5em;
+  bottom: 2.7em;
+}
+.poll .thumbnail .vote {
+  top: .4em;
+  right: 1.5em;
+}
+.drawing-modal img {
+  width: 100%;
 }
 /* RESPONSIVE
 -------------------------------------------------- */

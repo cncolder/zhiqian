@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>
+      {{# title}}{{title}}{{/ title}}
+      {{^ title}}好多童书 - 知谦文化传播{{/title}}
+    </title>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="http://apps.bdimg.com/libs/html5shiv/3.7/html5shiv.min.js"></script>
+      <script src="http://apps.bdimg.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <link rel="stylesheet" href="/css/all.css">
+  </head>
+  
+  <body>
+    <nav class="navbar navbar-default">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">切换导航</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">
+            <img alt="Brand" src="/img/brand.png">
+          </a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+              <a href="/"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> 首页</a>
+            </li>
+            <li><a href="/company">公司概况</a></li>
+            <li><a href="#">经营业务</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">好多动态 <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="/poll/outlets">"我爱蓝天"活动投票</a></li>
+                <li class="divider"></li>
+                <li><a href="#">新闻</a></li>
+                <li><a href="#">新书</a></li>
+              </ul>
+            </li>
+            <li><a href="http://zq17.taobao.com" target="_blank">图书商城</a></li>
+            <li><a href="#">产品中心</a></li>
+            
+            <li><a href="#">注册</a></li>
+            <li><a href="#">登录</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    
+    <div class="main">
+      {{> content}}
+    </div>
+    
+    <div class="footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <p class="pull-right"><a href="#">回到顶部</a></p>
+            <p>
+              © 2014-2015 好多图书, 知谦文化传播. · <a href="#">隐私</a> · <a href="#">条款</a> · 
+              吉ICP备2387730号
+              <img width="13" height="16" src="https://ss0.bdstatic.com/5a21bjqh_Q23odCf/static/superplus/img/copy_rignt_24.png">
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/polyfill.js"></script>
+    <script src="/js/index.js"></script>
+  </body>
+</html>

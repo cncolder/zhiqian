@@ -49,8 +49,7 @@ gulp.task('browserify', function() {
     .pipe(sourcemaps.init({
       loadMaps: true
     }))
-  // .pipe(uglify())
-  .on('error', gutil.log)
+    .on('error', gutil.log)
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest('./public/js/'));
 });
@@ -98,12 +97,11 @@ gulp.task('mocha', function(done) {
   }).on('close', done);
 });
 
-// process.on('beforeExit', function() {
-//   console.log('gulp exit');
-//   child.spawn('pm2', ['stop', 'all'], {
-//     stdio: 'inherit'
-//   });
-// });
+process.on('uncaughtException', function(err) {
+  child.spawn('pm2', ['startOrReload', 'package.json'], {
+    stdio: 'inherit'
+  });
+});
 
 process.on('SIGINT', function() {
   child.spawn('pm2', ['stop', 'package.json'], {

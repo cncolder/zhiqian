@@ -1,69 +1,64 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-  {{> head}}
-</head>
-
-<body>
-  {{> nav}}
-  
-  <div class="slide">
-    <div class="container">
-      <div id="myCarousel" class="carousel slide" data-ride="carousel">
-        <!-- Indicators -->
-        <ol class="carousel-indicators">
-          <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-          <li data-target="#myCarousel" data-slide-to="1" class=""></li>
-        </ol>
-        <div class="carousel-inner" role="listbox">
-          <div class="item active">
-            <a href="/poll/outlets">
-              <img class="first-slide" src="/img/slide-outlets.png" alt="欧亚奥特莱斯大型儿童现场绘画活动">
-            </a>
-          </div>
-          <div class="item">
-            <a href="/team">
-              <img class="second-slide" src="/img/slide-team.png" alt="中国权威学者专家入驻好多图书">
-            </a>
-          </div>
+<div class="slide">
+  <div class="container">
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+      <!-- Indicators -->
+      <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1" class=""></li>
+        <li data-target="#myCarousel" data-slide-to="2" class=""></li>
+      </ol>
+      <div class="carousel-inner" role="listbox">
+        <div class="item active">
+          <a href="/poll/outlets">
+            <img class="first-slide" src="/img/slide-outlets.png" alt="欧亚奥特莱斯大型儿童现场绘画活动">
+          </a>
         </div>
-        <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-          <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-          <span class="sr-only">上一页</span>
-        </a>
-        <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-          <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-          <span class="sr-only">下一页</span>
-        </a>
+        <div class="item">
+          <a href="/team">
+            <img class="second-slide" src="/img/slide-team.png" alt="中国权威学者专家入驻好多图书">
+          </a>
+        </div>
+        <div class="item">
+          <a href="http://zq17.taobao.com" target="_blank">
+            <img class="third-slide" src="/img/slide-books.jpg" alt="网站首页全家福">
+          </a>
+        </div>
       </div>
+      <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">上一页</span>
+      </a>
+      <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">下一页</span>
+      </a>
     </div>
   </div>
-  
-  <div class="poster">
-    <div class="container">
-      <div class="carousel slide" data-ride="carousel">
-        <div class="carousel-inner" role="listbox">
-          <div class="item active">
-            <img class="first-slide" src="/img/poster.png" alt="poster">
-            <div class="container">
-              <div class="carousel-caption">
-                <div class="row">
-                  <div class="col-xs-2 col-xs-offset-3">
-                    <a href="#">
-                      <img class="img-responsive" src="/img/button-company.png" alt="公司概况">
-                    </a>
-                  </div>
-                  <div class="col-xs-2">
-                    <a href="#">
-                      <img class="img-responsive" src="/img/button-expert.png" alt="专家育儿">
-                    </a>
-                  </div>
-                  <div class="col-xs-2">
-                    <a href="http://zq17.taobao.com" target="_blank">
-                      <img class="img-responsive" src="/img/button-store.png" alt="图书商城">
-                    </a>
-                  </div>
+</div>
+
+<div class="poster">
+  <div class="container">
+    <div class="carousel slide" data-ride="carousel">
+      <div class="carousel-inner" role="listbox">
+        <div class="item active">
+          <img class="first-slide" src="/img/poster.png" alt="poster">
+          <div class="container">
+            <div class="carousel-caption">
+              <div class="row">
+                <div class="col-xs-2 col-xs-offset-3">
+                  <a href="#">
+                    <img class="img-responsive" src="/img/button-company.png" alt="公司概况">
+                  </a>
+                </div>
+                <div class="col-xs-2">
+                  <a href="#">
+                    <img class="img-responsive" src="/img/button-expert.png" alt="专家育儿">
+                  </a>
+                </div>
+                <div class="col-xs-2">
+                  <a href="http://zq17.taobao.com" target="_blank">
+                    <img class="img-responsive" src="/img/button-store.png" alt="图书商城">
+                  </a>
                 </div>
               </div>
             </div>
@@ -72,119 +67,110 @@
       </div>
     </div>
   </div>
-  
-  <div class="news">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-6">
-          <div class="title">
-            <img src="/img/title-trend.png" alt="好多动态">
-          </div>
-          
-          <div role="tabpanel">
+</div>
 
-            <!-- Nav tabs -->
-            <ul class="nav nav-tabs nav-justified" role="tablist">
-              <li role="presentation" class="active"><a href="#" aria-controls=".trend" role="tab" data-toggle="tab">最新动态</a></li>
-              <li role="presentation"><a href="#" aria-controls=".media" role="tab" data-toggle="tab">媒体关注</a></li>
-              <li role="presentation"><a href="#" aria-controls=".photo" role="tab" data-toggle="tab">图片新闻</a></li>
-              <li role="presentation"><a href="#" aria-controls=".video" role="tab" data-toggle="tab">视频精选</a></li>
-            </ul>
-
-            <!-- Tab panes -->
-            <div class="tab-content">
-              <div role="tabpanel" class="tab-pane active trend">
-                
-              </div>
-              <div role="tabpanel" class="tab-pane media">
-                
-              </div>
-              <div role="tabpanel" class="tab-pane photo">
-                
-              </div>
-              <div role="tabpanel" class="tab-pane video">
-                
-              </div>
-            </div>
-
-          </div>
+<div class="news">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="title">
+          <img src="/img/title-trend.png" alt="好多动态">
         </div>
-      
-        <div class="col-lg-6">
-          <div class="title">
-            <img src="/img/title-product.png" alt="产品展示">
-          </div>
-          
-          <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-            <div class="panel panel-default">
-              <div class="panel-heading" role="tab" id="headingOne">
-                <h4 class="panel-title">
-                  <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                    新书推荐
-                  </a>
-                </h4>
-              </div>
-              <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-                <div class="panel-body">
-                  新书推荐内容
-                </div>
-              </div>
+        
+        <div role="tabpanel">
+
+          <!-- Nav tabs -->
+          <ul class="nav nav-tabs nav-justified" role="tablist">
+            <li role="presentation" class="active"><a href="#" aria-controls=".trend" role="tab" data-toggle="tab">最新动态</a></li>
+            <li role="presentation"><a href="#" aria-controls=".media" role="tab" data-toggle="tab">媒体关注</a></li>
+            <li role="presentation"><a href="#" aria-controls=".photo" role="tab" data-toggle="tab">图片新闻</a></li>
+            <li role="presentation"><a href="#" aria-controls=".video" role="tab" data-toggle="tab">视频精选</a></li>
+          </ul>
+
+          <!-- Tab panes -->
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active trend">
+              
             </div>
-            <div class="panel panel-default">
-              <div class="panel-heading" role="tab" id="headingTwo">
-                <h4 class="panel-title">
-                  <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                    重点图书
-                  </a>
-                </h4>
-              </div>
-              <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-                <div class="panel-body">
-                  重点图书内容
-                </div>
-              </div>
+            <div role="tabpanel" class="tab-pane media">
+              
             </div>
-            <div class="panel panel-default">
-              <div class="panel-heading" role="tab" id="headingThree">
-                <h4 class="panel-title">
-                  <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                    好多童书
-                  </a>
-                </h4>
-              </div>
-              <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-                <div class="panel-body">
-                  好多童书内容
-                </div>
-              </div>
+            <div role="tabpanel" class="tab-pane photo">
+              
             </div>
-            <div class="panel panel-default">
-              <div class="panel-heading" role="tab" id="headingFour">
-                <h4 class="panel-title">
-                  <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseThree">
-                    畅销图书
-                  </a>
-                </h4>
-              </div>
-              <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
-                <div class="panel-body">
-                  畅销图书内容
-                </div>
-              </div>
+            <div role="tabpanel" class="tab-pane video">
+              
             </div>
           </div>
+
         </div>
       </div>
     
+      <div class="col-lg-6">
+        <div class="title">
+          <img src="/img/title-product.png" alt="产品展示">
+        </div>
+        
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+          <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingOne">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                  新书推荐
+                </a>
+              </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+              <div class="panel-body">
+                新书推荐内容
+              </div>
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingTwo">
+              <h4 class="panel-title">
+                <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                  重点图书
+                </a>
+              </h4>
+            </div>
+            <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+              <div class="panel-body">
+                重点图书内容
+              </div>
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingThree">
+              <h4 class="panel-title">
+                <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                  好多童书
+                </a>
+              </h4>
+            </div>
+            <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+              <div class="panel-body">
+                好多童书内容
+              </div>
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingFour">
+              <h4 class="panel-title">
+                <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseThree">
+                  畅销图书
+                </a>
+              </h4>
+            </div>
+            <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+              <div class="panel-body">
+                畅销图书内容
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
   
-  <!-- FOOTER -->
-  {{> footer}}
-
-  <div id="modals"></div>
-
-  {{> script}}
-</body>
-
-</html>
+  </div>
+</div>

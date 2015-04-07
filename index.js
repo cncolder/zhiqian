@@ -1,3 +1,4 @@
+var log = require('./lib/debug')('index');
 var app = require('./app');
 
 if (module.parent) {
@@ -10,6 +11,6 @@ if (module.parent) {
 
   server.listen(port, host, function() {
     var address = server.address();
-    console.log('App listening at http://%s:%s', address.address, address.port);
+    log('App listening at http://%s:%s', address.address, address.port);
   });
 }

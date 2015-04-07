@@ -4,9 +4,12 @@
 /* GLOBAL STYLES
 -------------------------------------------------- */
 
-body {
-  // padding-bottom: 40px;
-  // color: #5a5a5a;
+html, body {
+  height: 100%;
+
+  > .main {
+    min-height: 80%;
+  }
 }
 
 
@@ -125,6 +128,44 @@ body {
     height: 94px;
     color: white;
     // background-color: rgb(137,177,211);
+  }
+}
+
+
+/* FOOTER
+-------------------------------------------------- */
+
+.poll {
+  .row {
+    margin-top: 1em;
+  }
+  
+  .thumbnail {
+    .label-default, .badge {
+      background-color: fadeout(@label-default-bg, 50%);
+      position: absolute;
+    }
+    
+    .badge {
+      top: .5em;
+      // left: 1em;
+    }
+    
+    .name {
+      left: 1.5em;
+      bottom: 2.7em;
+    }
+    
+    .vote {
+      top: .4em;
+      right: 1.5em;
+    }
+  }
+}
+
+.drawing-modal {
+  img {
+    width: 100%;
   }
 }
 
