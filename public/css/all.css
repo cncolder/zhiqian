@@ -9723,14 +9723,38 @@ body > .main {
   height: 94px;
   color: white;
 }
-/* FOOTER
+/* COMPANY
+-------------------------------------------------- */
+.company .jumbotron {
+  margin: 0;
+  text-align: center;
+  color: white;
+  background: transparent url(/img/bg_company_main.jpg) no-repeat scroll top center;
+  background-size: cover;
+}
+.team {
+  text-align: center;
+}
+.team .thumbnail img {
+  width: 100%;
+}
+/* POLL
 -------------------------------------------------- */
 .poll .row {
   margin-top: 1em;
 }
+.poll .thumbnail {
+  min-height: 100px;
+}
+.poll .thumbnail img {
+  width: 100%;
+}
+.poll .thumbnail h4 {
+  margin: 0;
+}
 .poll .thumbnail .label-default,
 .poll .thumbnail .badge {
-  background-color: rgba(119, 119, 119, 0.5);
+  background-color: rgba(119, 119, 119, 0.7);
   position: absolute;
 }
 .poll .thumbnail .badge {
@@ -9738,14 +9762,15 @@ body > .main {
 }
 .poll .thumbnail .name {
   left: 1.5em;
-  bottom: 2.7em;
+  bottom: 1.9em;
 }
 .poll .thumbnail .vote {
   top: .4em;
   right: 1.5em;
 }
-.drawing-modal img {
-  width: 100%;
+.drawing-modal .jumbotron {
+  margin: 0;
+  padding: 15px 0;
 }
 /* RESPONSIVE
 -------------------------------------------------- */

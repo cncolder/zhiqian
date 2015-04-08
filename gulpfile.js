@@ -14,7 +14,11 @@ gulp.task('watch', function() {
   gulp.watch('views/less/**/*.less', ['less']);
   gulp.watch('views/js/**/*.js', ['browserify']);
   gulp.watch(
-    ['index.js', 'app.js', 'lib/*.js', 'models/**/*.js', 'routes/**/*.js'], ['pm2:reload']
+    [
+      './index.js', './app.js',
+      'data/**/*.js', 'lib/*.js', 'models/**/*.js', 'routes/**/*.js'
+    ],
+    ['pm2:reload']
   );
   gulp.watch(['test/**/*.js', '!test/browser/*'], ['mocha']);
 });
@@ -51,7 +55,7 @@ gulp.task('browserify', function() {
     }))
     .on('error', gutil.log)
     .pipe(sourcemaps.write('./'))
-    .pipe(gulp.dest('./public/js/'));
+    .pipe(gulp.dest('./public/js'));
 });
 
 gulp.task('pm2:start', function(cb) {

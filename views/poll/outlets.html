@@ -1,46 +1,47 @@
 <div class="poll">
   <div class="container">
     <div class="row">
-      {{#myvote}}
-      <p class="col-xs-12">
-        您已经把票投给了{{code}}号{{name}}.
-      </p>
-      {{/myvote}}
+      {{# myvote}}
+      <h3 class="col-xs-12">
+        您的选择: {{code}}号{{name}}.
+      </h3>
+      {{/ myvote}}
     </div>
     
     <div class="row">
       <div class="col-xs-12">
         <div class="input-group">
-          <input class="form-control input-lg" type="search" placeholder="搜索姓名或编号...">
-          <span class="input-group-btn">
-            <button class="btn btn-default btn-lg" type="button">
-              <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-            </button>
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
           </span>
+          <input class="form-control input-lg" type="search" placeholder="搜索姓名或编号...">
         </div>
       </div>
     </div>
     
     <div class="row">
-      {{#options}}
+      {{# options}}
       <div class="col-xs-6 col-md-4 col-lg-3 drawing"
         data-code="{{code}}" data-name="{{name}}" data-vote="{{vote}}">
         <div class="thumbnail">
-          <!-- <img src="/img/poll/outlets/{{code}}-{{name}}.jpg" alt="{{name}}"> -->
           <a href="#" data-toggle="modal" data-target=".drawing-modal">
-            <img src="/img/poll/outlets/drawing.300.jpg" alt="{{name}}">
+            <img class="img-responsive lazy"
+              data-original="/img/poll/outlets/200/{{code}} {{name}}.jpg" alt="{{name}}"
+              width="200" height="133">
           </a>
           <span class="badge">{{index}}</span>
           <h4><span class="label label-default name">{{code}} - {{name}}</span></h4>
+          {{# vote}}
           <h4>
             <span class="label label-default vote">
               <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
               {{vote}}
             </span>
           </h4>
+          {{/ vote}}
         </div>
       </div>
-      {{/options}}
+      {{/ options}}
     </div>
   </div>
 </div>
@@ -50,11 +51,27 @@
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+          </button>
           <h4 class="modal-title"></h4>
         </div>
         <div class="modal-body">
-          <img class="img-responsive" src="" alt="">
+          <img class="img-responsive center-block vote-drawing" src="#" alt="">
+          <div class="jumbotron vote-result hidden">
+            <div class="container">
+              <h3 class="text-success">投票成功!</h3>
+              <p class="text-success">
+                恭喜您获得由好多童书提供的淘宝优惠卷.
+              </p>
+              <p>
+                <a class="btn btn-primary btn-lg"
+                  href="http://zq17.taobao.com" target="_blank" role="button">
+                  前去领取
+                </a>
+              </p>
+            </div>
+          </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>

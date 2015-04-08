@@ -1,39 +1,81 @@
+// require
+
 var log = require('./lib/debug')('app');
+var ms = require('ms');
+
+// app
+
 var koa = require('koa');
 var app = koa();
+app.proxy = true;
 
-// static file
+// config
 
-var stat = require('koa-static');
-app.use(stat('public', {
-  maxage: 0
-}));
+var options = {
+  compress: {
+    // filter: function(content_type) {
+    //   return /text/i.test(content_type)
+    // },
+    // threshold: 2048,
+    // flush: require('zlib').Z_SYNC_FLUSH
+  },
 
-// polyfills
+  fileServer: {
+    root: './public',
+    maxage: ms('30 days')
+    // index: 'index.html',
+    // hidden: false
+  },
 
-var polyfills = require('koa-polyfills');
-app.use(polyfills({
-  path: '/js/polyfill.js'
-}));
+  polyfills: {
+    path: '/js/polyfill.js'
+  },
 
-// view renderer
-
-var views = require('koa-views');
-app.use(views('./views', {
-  default: 'html',
-  map: {
-    html: 'hogan'
+  views: {
+    path: './views',
+    default: 'html',
+    map: {
+      html: 'hogan'
+    }
   }
-}));
+};
+
+if (app.env == 'development') {
+  options.fileServer.maxage = 0;
+}
+
+var cache = {};
+
+// response time
+
+app.use(require('koa-response-time')());
 
 // logger
 
-app.use(function * (next) {
-  var start = new Date();
-  yield next;
-  var ms = new Date() - start;
-  log('%s %s - %s', this.method, this.url, ms);
-});
+if (app.env == 'development') {
+  app.use(require('koa-logger')(options.logger));
+}
+
+// compress
+
+app.use(require('koa-compress')(options.compress));
+
+// file server
+
+app.use(require('koa-static')(options.fileServer.root, options.fileServer));
+
+// polyfills
+
+app.use(require('koa-polyfills')(options.polyfills));
+
+// view renderer
+
+app.use(require('koa-views')(options.views.path, options.views));
+
+// body
+
+var body = require('koa-body-parsers');
+body(app);
 
 // json
 
@@ -61,26 +103,81 @@ app
   .get('/company', function * () {
     yield this.render('layout', {
       partials: {
-        company: 'company'
+        content: 'company'
+      }
+    });
+  })
+  .get('/business', function * () {
+    yield this.render('layout', {
+      partials: {
+        content: 'business'
+      }
+    });
+  })
+  .get('/product', function * () {
+    yield this.render('layout', {
+      partials: {
+        content: 'product'
+      }
+    });
+  })
+  .get('/team', function * () {
+    yield this.render('layout', {
+      partials: {
+        content: 'team'
       }
     });
   })
   .get('/poll/outlets', function * () {
-    log('env:', process.env);
     var ip = this.ip;
 
+    if (!cache.outlets) {
+      var path = require('path');
+      var fs = require('mz/fs');
+      var imgs = yield fs.readdir('./public/img/poll/outlets/300');
+
+      cache.outlets = imgs.filter(function(img) {
+        return path.extname(img) == '.jpg';
+      }).map(function(img) {
+        var arr = path.basename(img, '.jpg').split(/\s+/);
+        return {
+          code: arr[0],
+          name: arr[1]
+        };
+      });
+    }
+
+    var myvote = yield Vote.findOne({
+      ip: ip
+    });
+    if (myvote) {
+      myvote = myvote.toJSON();
+      myvote.name = cache.outlets.find(function(item) {
+        return item.code == myvote.code;
+      }).name;
+    }
+
+    var votes = yield Vote.aggregate()
+      .match({
+        category: 'outlets'
+      })
+      .group({
+        _id: '$code',
+        count: {
+          $sum: 1
+        }
+      }).exec();
+
+    votes.forEach(function(vote) {
+      cache.outlets.find(function(option) {
+        return option.code == vote._id;
+      }).vote = vote.count;
+    });
+
     this.state = {
-      myvote: yield Vote.findOne({
-        ip: ip
-      }),
-      options: require('./data/poll/outlets').map(function(item) {
-        item.vote = Math.floor(1 + (Math.random() * 100));
-        return item;
-      }).sort(function(a, b) {
-        return b.vote - a.vote;
-      }).map(function(item, index) {
-        if (index < 50) item.index = index + 1;
-        return item;
+      myvote: myvote,
+      options: cache.outlets.sort(function(a, b) {
+        return (b.vote || 0) - (a.vote || 0);
       })
     };
 
@@ -90,8 +187,21 @@ app
       }
     });
   })
-  .post('/poll/outlets.json', function * () {
-    log(this.ip);
+  .post('/poll/outlets', function * () {
+    var ip = this.ip;
+    var vote = yield Vote.findOne({
+      ip: ip
+    });
+
+    this.assert(!vote, 409, JSON.stringify(vote));
+
+    var body = yield this.request.urlencoded();
+    vote = yield Vote.create({
+      category: 'outlets',
+      code: body.code,
+      ip: ip
+    });
+    this.body = vote;
   });
 
 module.exports = app;

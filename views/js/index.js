@@ -1,3 +1,7 @@
+// log
+var log = require('./debug')('index');
+
+// global
 var pathname = location.pathname;
 
 // active nav link
@@ -8,7 +12,10 @@ var pathname = location.pathname;
   $li.addClass('active');
 })();
 
+// tooltip
+$('[data-toggle="tooltip"]').tooltip();
 
+// poster button animate
 var posterAnimate = 'animated bounceIn';
 $('.poster a').hover(function() {
   $(this).find('img').addClass(posterAnimate);
@@ -16,7 +23,7 @@ $('.poster a').hover(function() {
   $(this).find('img').removeClass(posterAnimate);
 });
 
-
+// outlets poll page
 var outlets = require('./poll/outlets');
 if (pathname.startsWith('/poll/outlets')) {
   outlets();

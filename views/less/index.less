@@ -132,7 +132,36 @@ html, body {
 }
 
 
-/* FOOTER
+/* COMPANY
+-------------------------------------------------- */
+
+.company {
+  .jumbotron {
+    margin: 0;
+    
+    text-align: center;
+    color: white;
+    
+    background: transparent url(/img/bg_company_main.jpg) no-repeat scroll top center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
+}
+
+.team {
+  text-align: center;
+  
+  .thumbnail {
+    img {
+      width: 100%;
+    }
+  }
+}
+
+
+/* POLL
 -------------------------------------------------- */
 
 .poll {
@@ -141,8 +170,18 @@ html, body {
   }
   
   .thumbnail {
+    min-height: 100px;
+    
+    img {
+      width: 100%;
+    }
+    
+    h4 {
+      margin: 0;
+    }
+    
     .label-default, .badge {
-      background-color: fadeout(@label-default-bg, 50%);
+      background-color: fadeout(@label-default-bg, 30%);
       position: absolute;
     }
     
@@ -153,7 +192,7 @@ html, body {
     
     .name {
       left: 1.5em;
-      bottom: 2.7em;
+      bottom: 1.9em;
     }
     
     .vote {
@@ -164,8 +203,9 @@ html, body {
 }
 
 .drawing-modal {
-  img {
-    width: 100%;
+  .jumbotron {
+    margin: 0;
+    padding: 15px 0;
   }
 }
 
@@ -173,11 +213,34 @@ html, body {
 /* RESPONSIVE
 -------------------------------------------------- */
 
+// iPhone 5
 @media (min-width: 320px) {
+  // .poll {
+  //   .drawing {
+  //     padding-left: 5px;
+  //     padding-right: 5px;
+  //   }
+  // }
 }
 
+// iPhone 6
+@media (min-width: 375px) {
+}
+
+// iPhone 6 Plus
+@media (min-width: 414px) {
+}
+
+// iPad
 @media (min-width: 768px) {
+  // .poll {
+  //   .drawing {
+  //     padding-left: 15px;
+  //     padding-right: 15px;
+  //   }
+  // }
 }
 
+// PC
 @media (min-width: 992px) {
 }
