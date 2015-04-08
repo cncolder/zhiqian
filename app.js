@@ -134,7 +134,7 @@ app
     if (!cache.outlets) {
       var path = require('path');
       var fs = require('mz/fs');
-      var imgs = yield fs.readdir('./public/img/poll/outlets/300');
+      var imgs = yield fs.readdir('./public/img/poll/outlets/200');
 
       cache.outlets = imgs.filter(function(img) {
         return path.extname(img) == '.jpg';
