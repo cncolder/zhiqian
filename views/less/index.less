@@ -54,8 +54,11 @@ html, body {
 /* CUSTOMIZE THE CAROUSEL
 -------------------------------------------------- */
 
-@carousel-control-width: 5%;
-@carousel-control-opacity: .0;
+@carousel-control-width: 10%;
+// @carousel-control-color: #000;
+@carousel-control-opacity: 0;
+@carousel-indicator-active-bg: #000;
+@carousel-indicator-border-color: #000;
 
 /* Carousel base class */
 .carousel {
@@ -136,27 +139,18 @@ html, body {
 -------------------------------------------------- */
 
 .company {
-  .jumbotron {
-    margin: 0;
-    
-    text-align: center;
-    color: white;
-    
-    background: transparent url(/img/bg_company_main.jpg) no-repeat scroll top center;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
+  p {
+    text-indent: 2em;
   }
 }
 
-.team {
-  text-align: center;
-  
-  .thumbnail {
-    img {
-      width: 100%;
-    }
+
+/* BUSINESS
+-------------------------------------------------- */
+
+.business {
+  p {
+    text-indent: 2em;
   }
 }
 
