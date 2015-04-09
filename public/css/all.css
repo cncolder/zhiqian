@@ -9682,6 +9682,8 @@ Copyright (c) 2015 Daniel Eden
 html,
 body {
   height: 100%;
+  font-family: "Microsoft YaHei", "微软雅黑", "Microsoft JhengHei", "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #666;
 }
 html > .main,
 body > .main {
@@ -9726,11 +9728,13 @@ body > .main {
 /* COMPANY
 -------------------------------------------------- */
 .company p {
+  line-height: 2em;
   text-indent: 2em;
 }
 /* BUSINESS
 -------------------------------------------------- */
 .business p {
+  line-height: 2em;
   text-indent: 2em;
 }
 /* POLL
