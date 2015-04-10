@@ -289,7 +289,7 @@ app
     if (userinfo.subscribe) {
       this.redirect(this.query.state);
     } else {
-      this.redirect('/wechat');
+      this.redirect('http://mp.weixin.qq.com/s?__biz=MjM5MTI2NDQxMg==&mid=204219959&idx=1&sn=981c14f1870156ffc33076c10b7dab7a#rd'); // jshint ignore:line
     }
   })
   .get('/wx/token', function * () {
