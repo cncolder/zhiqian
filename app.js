@@ -220,7 +220,7 @@ app
   })
   .get('/wx/authorize', function * () {
     var code = this.query.code;
-    var promise = new Promise(function(resolve, reject) {
+    var result = yield new Promise(function(resolve, reject) {
       wechatApi.getAccessToken(code, function(err, result) {
         if (err) {
           reject(err);
@@ -229,13 +229,19 @@ app
         }
       });
     });
-    var result = yield promise;
-    
-    // var accessToken = result.data.access_token;
-    // var openid = result.data.openid;
+    var openid = result.data.openid;
+    var userInfo = yield new Promise(function(resolve, reject) {
+      wechatApi.getUser(openid, function(err, result) {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(result);
+        }
+      });
+    });
 
-    this.body = [code, JSON.stringify(result)].join('\n\n');
-    
+    this.body = [openid, JSON.stringify(userInfo)].join('\n\n');
+
   });
 
 module.exports = app;
