@@ -9731,6 +9731,9 @@ body > .main {
 }
 /* COMPANY
 -------------------------------------------------- */
+.company .container {
+  background: #ffffff url(/img/bg-business.jpg) no-repeat scroll top left;
+}
 .company h3 {
   text-align: center;
 }
