@@ -8,6 +8,7 @@ var ms = require('ms');
 var koa = require('koa');
 var app = koa();
 app.proxy = true;
+app.keys = ['haoduo tongshu zhiqian'];
 
 // config
 
@@ -31,6 +32,10 @@ var options = {
     path: '/js/polyfill.js'
   },
 
+  session: {
+
+  },
+
   views: {
     path: './views',
     default: 'html',
@@ -38,7 +43,7 @@ var options = {
       html: 'hogan'
     }
   },
-  
+
   wechat: {
     id: 'wxfe7869827f87e1f8',
     secret: '46ab238379501c7df5eff0318b9162b8'
@@ -73,19 +78,21 @@ app.use(require('koa-static')(options.fileServer.root, options.fileServer));
 
 app.use(require('koa-polyfills')(options.polyfills));
 
+// session
+
+app.use(require('koa-session')(app, options.session));
+
 // view renderer
 
 app.use(require('koa-views')(options.views.path, options.views));
 
 // body
 
-var body = require('koa-body-parsers');
-body(app);
+require('koa-body-parsers')(app);
 
 // json
 
-var json = require('koa-json');
-app.use(json());
+app.use(require('koa-json')());
 
 // router
 
@@ -237,15 +244,7 @@ app
       });
     });
     var openid = result.data.openid;
-    // var userInfo = yield new Promise(function(resolve, reject) {
-    //   wechatOAuth.getUser(openid, function(err, result) {
-    //     if (err) {
-    //       reject(err);
-    //     } else {
-    //       resolve(result);
-    //     }
-    //   });
-    // });
+
     var userInfo = yield new Promise(function(resolve, reject) {
       wechatApi.getUser(openid, function(err, result) {
         if (err) {
@@ -256,7 +255,14 @@ app
       });
     });
 
-    this.body = [openid, JSON.stringify(userInfo)].join('\n\n');
+    this.session.wx = {
+      openid: openid,
+      user: {
+        info: userInfo
+      }
+    };
+
+    this.body = JSON.stringify(this.session);
   })
   .get('/wx/token', function * () {
     this.body = this.query.echostr;
