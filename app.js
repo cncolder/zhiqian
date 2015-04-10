@@ -158,7 +158,7 @@ app
         iswx: iswx
       });
     }
-    
+
     if (!this.session.wx || !this.session.wx.code) {
       var url = wechatOAuth.getAuthorizeURL(
         'http://haoduo.vitarn.com/wx/authorize', '/poll/outlets', 'snsapi_base'
@@ -166,7 +166,7 @@ app
 
       return this.redirect(url);
     }
-    
+
     delete this.session.wx.code;
 
     var wxid = this.session.wx.openid;
@@ -224,7 +224,8 @@ app
     yield this.render('layout', {
       partials: {
         content: 'poll/outlets'
-      }
+      },
+      iswx: iswx
     });
   })
   .post('/poll/outlets', function * () {
