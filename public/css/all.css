@@ -9712,6 +9712,9 @@ body > .main {
 }
 /* NEWS
 -------------------------------------------------- */
+.news .row .col-md-12 .row {
+  background: #ffffff url(/img/bg-news.png) repeat scroll top left;
+}
 .news .title {
   margin: 30px 0px;
 }
@@ -9727,12 +9730,18 @@ body > .main {
 }
 /* COMPANY
 -------------------------------------------------- */
+.company h3 {
+  text-align: center;
+}
 .company p {
   line-height: 2em;
   text-indent: 2em;
 }
 /* BUSINESS
 -------------------------------------------------- */
+.business h3 {
+  text-align: center;
+}
 .business p {
   line-height: 2em;
   text-indent: 2em;

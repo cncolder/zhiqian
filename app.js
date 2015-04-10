@@ -86,6 +86,8 @@ app.use(json());
 
 var router = require('koa-router');
 var Vote = require('./models/vote');
+var OAuth = require('wechat-oauth');
+// var api = new OAuth('wxfe7869827f87e1f8', 'secret');
 
 app
   .use(router(app))
@@ -146,6 +148,10 @@ app
         };
       });
     }
+    
+    log(cache.outlets.map(function (o) {
+      return o.name;
+    }));
 
     var myvote = yield Vote.findOne({
       ip: ip
