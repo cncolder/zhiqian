@@ -67,6 +67,12 @@ html, body {
 .carousel {
   // height: 470px;
   // margin-bottom: 60px;
+  .carousel-control {
+    background-image: none;
+    
+    .glyphicon-chevron-left { &:before { content: "\e257"; } }
+    .glyphicon-chevron-right { &:before { content: "\e258"; } }
+  }
   
   /* Declare heights because of positioning of img element */
   .item {
@@ -149,6 +155,35 @@ html, body {
     background: #fff url(/img/bg-business.jpg) no-repeat scroll top left;
   }
   
+  ul.navlist {
+    
+    
+    li {
+      margin: 20px;
+    }
+    
+    a {
+      color: gray;
+      
+      .glyphicon {
+        margin-right: 1em;
+        padding: 2px 2px;
+        color: white;
+        background-color: gray;
+        font-size: 40%;
+      }
+      
+      &:hover {
+        color: orange;
+        
+        .glyphicon {
+          color: white;
+          background-color: orange;
+        }
+      }
+    }
+  }
+  
   h3 {
     text-align: center;
   }
@@ -229,6 +264,9 @@ html, body {
 
 // iPhone 5
 @media (min-width: 320px) {
+  .slide .carousel .carousel-indicators {
+    .hidden();
+  }
   // .poll {
   //   .drawing {
   //     padding-left: 5px;
@@ -247,6 +285,9 @@ html, body {
 
 // iPad
 @media (min-width: 768px) {
+  .slide .carousel .carousel-indicators {
+    .show();
+  }
   // .poll {
   //   .drawing {
   //     padding-left: 15px;

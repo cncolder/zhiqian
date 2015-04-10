@@ -9701,6 +9701,15 @@ body > .main {
 .carousel {
   /* Declare heights because of positioning of img element */
 }
+.carousel .carousel-control {
+  background-image: none;
+}
+.carousel .carousel-control .glyphicon-chevron-left:before {
+  content: "\e257";
+}
+.carousel .carousel-control .glyphicon-chevron-right:before {
+  content: "\e258";
+}
 /* Since positioning the image, we need to help out the caption */
 .carousel-inner > .item > img {
   width: 100%;
@@ -9733,6 +9742,26 @@ body > .main {
 -------------------------------------------------- */
 .company .container {
   background: #ffffff url(/img/bg-business.jpg) no-repeat scroll top left;
+}
+.company ul.navlist li {
+  margin: 20px;
+}
+.company ul.navlist a {
+  color: gray;
+}
+.company ul.navlist a .glyphicon {
+  margin-right: 1em;
+  padding: 2px 2px;
+  color: white;
+  background-color: gray;
+  font-size: 40%;
+}
+.company ul.navlist a:hover {
+  color: orange;
+}
+.company ul.navlist a:hover .glyphicon {
+  color: white;
+  background-color: orange;
 }
 .company h3 {
   text-align: center;
@@ -9786,3 +9815,13 @@ body > .main {
 }
 /* RESPONSIVE
 -------------------------------------------------- */
+@media (min-width: 320px) {
+  .slide .carousel .carousel-indicators {
+    display: none !important;
+  }
+}
+@media (min-width: 768px) {
+  .slide .carousel .carousel-indicators {
+    display: block !important;
+  }
+}
