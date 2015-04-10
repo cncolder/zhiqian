@@ -88,10 +88,6 @@ var router = require('koa-router');
 var Vote = require('./models/vote');
 var WechatOAuth = require('wechat-oauth');
 var wechatApi = new WechatOAuth('wxfe7869827f87e1f8', '46ab238379501c7df5eff0318b9162b8');
-var wechatAuthorizeUrl = wechatApi.getAuthorizeURL(
-  'http://haoduo.vitarn.com/wx/authorize', 'haoduotongshu', 'snsapi_base'
-);
-log(wechatAuthorizeUrl);
 
 app
   .use(router(app))
@@ -135,6 +131,15 @@ app
     });
   })
   .get('/poll/outlets', function * () {
+    // Mozilla/5.0 (iPhone; CPU iPhone OS 8_1_2 like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) Mobile/12B440 MicroMessenger/6.1.4 NetType/WIFI
+    if (/micromessenger/i.test(this.get('user-agent'))) {
+      var url = wechatApi.getAuthorizeURL(
+        'http://haoduo.vitarn.com/wx/authorize', '/poll/outlets', 'snsapi_base'
+      );
+      
+      return this.redirect(url);
+    }
+    
     var ip = this.ip;
 
     if (!cache.outlets) {
@@ -221,7 +226,7 @@ app
       var accessToken = result.data.access_token;
       var openid = result.data.openid;
 
-      this.body = [code, access_token, openip].join('\n');
+      this.body = [code, accessToken, openid].join('\n');
     });
   });
 
