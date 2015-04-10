@@ -13,11 +13,16 @@ var schema = new mongoose.Schema({
     required: true
   },
 
+  wxid: {
+    type: String,
+    required: true,
+    unique: true
+  },
+  
   ip: {
     type: String,
     match: /^(?:\d{1,3}\.){3}\d{1,3}$/,
-    required: true,
-    unique: true
+    required: true
   }
 }, {
   timestamps: true

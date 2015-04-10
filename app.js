@@ -145,8 +145,8 @@ app
     });
   })
   .get('/poll/outlets', function * () {
-    // Mozilla/5.0 (iPhone; CPU iPhone OS 8_1_2 like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) Mobile/12B440 MicroMessenger/6.1.4 NetType/WIFI
-    if (/micromessenger/i.test(this.get('user-agent'))) {
+    'Mozilla/5.0 (iPhone; CPU iPhone OS 8_1_2 like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) Mobile/12B440 MicroMessenger/6.1.4 NetType/WIFI'; // jshint ignore:line
+    if (/micromessenger/i.test(this.get('user-agent')) && !this.session.wx) {
       var url = wechatOAuth.getAuthorizeURL(
         'http://haoduo.vitarn.com/wx/authorize', '/poll/outlets', 'snsapi_base'
       );
@@ -154,7 +154,7 @@ app
       return this.redirect(url);
     }
 
-    var ip = this.ip;
+    var wxid = this.session.wx.openid;
 
     if (!cache.outlets) {
       var path = require('path');
@@ -172,12 +172,8 @@ app
       });
     }
 
-    // log(cache.outlets.map(function (o) {
-    //   return o.name;
-    // }));
-
     var myvote = yield Vote.findOne({
-      ip: ip
+      wxid: wxid
     });
     if (myvote) {
       myvote = myvote.toJSON();
@@ -217,9 +213,10 @@ app
     });
   })
   .post('/poll/outlets', function * () {
+    var wxid = this.session.wx.openid;
     var ip = this.ip;
     var vote = yield Vote.findOne({
-      ip: ip
+      wxid: wxid
     });
 
     this.assert(!vote, 409, JSON.stringify(vote));
@@ -228,9 +225,21 @@ app
     vote = yield Vote.create({
       category: 'outlets',
       code: body.code,
+      wxid: wxid,
       ip: ip
     });
     this.body = vote;
+  })
+  .get('/wechat', function * () {
+    if (/micromessenger/i.test(this.get('user-agent'))) {
+      yield this.render('wechat.m.html');
+    } else {
+      yield this.render('layout', {
+        partials: {
+          content: 'wechat'
+        }
+      });
+    }
   })
   .get('/wx/authorize', function * () {
     var code = this.query.code;
@@ -245,7 +254,7 @@ app
     });
     var openid = result.data.openid;
 
-    var userInfo = yield new Promise(function(resolve, reject) {
+    var userinfo = yield new Promise(function(resolve, reject) {
       wechatApi.getUser(openid, function(err, result) {
         if (err) {
           reject(err);
@@ -257,14 +266,19 @@ app
 
     this.session.wx = {
       openid: openid,
-      user: {
-        info: userInfo
-      }
+      userinfo: userinfo
     };
 
-    this.body = JSON.stringify(this.session);
+    if (userinfo.subscribe) {
+      this.redirect(this.query.state);
+    } else {
+      this.redirect('/wechat');
+    }
   })
   .get('/wx/token', function * () {
+    this.body = this.query.echostr;
+  })
+  .post('/wx/token', function * () {
     this.body = this.query.echostr;
   });
 
