@@ -136,10 +136,10 @@ app
       var url = wechatApi.getAuthorizeURL(
         'http://haoduo.vitarn.com/wx/authorize', '/poll/outlets', 'snsapi_base'
       );
-      
+
       return this.redirect(url);
     }
-    
+
     var ip = this.ip;
 
     if (!cache.outlets) {
@@ -220,13 +220,22 @@ app
   })
   .get('/wx/authorize', function * () {
     var code = this.query.code;
-
-    wechatApi.getAccessToken(code, function(err, result) {
-      // var accessToken = result.data.access_token;
-      // var openid = result.data.openid;
-
-      this.body = [code, JSON.stringify(result)].join('\n\n');
+    var promise = new Promise(function(resolve, reject) {
+      wechatApi.getAccessToken(code, function(err, result) {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(result);
+        }
+      });
     });
+    var result = yield promise;
+    
+    // var accessToken = result.data.access_token;
+    // var openid = result.data.openid;
+
+    this.body = [code, JSON.stringify(result)].join('\n\n');
+    
   });
 
 module.exports = app;
