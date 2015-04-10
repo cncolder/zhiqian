@@ -241,7 +241,9 @@ app
     });
 
     this.body = [openid, JSON.stringify(userInfo)].join('\n\n');
-
+  })
+  .get('/wx/token', function * () {
+    this.body = this.query.echostr;
   });
 
 module.exports = app;
