@@ -1,3 +1,4 @@
+{{# iswx}}
 <div class="poll">
   <div class="container">
     <div class="row">
@@ -81,3 +82,18 @@
     </div>
   </div>
 </div>
+{{/ iswx}}
+
+{{^ iswx}}
+<div class="poll">
+  <div class="container">
+    <div class="row">
+      <div class="jumbotron">
+        <h1>公众微信号</h1>
+        <p>请关注好多童书公众微信号之后进行投票.</p>
+        <p><img class="" src="/img/wechat-qrcode.jpg" alt="微信二维码"></p>
+      </div>
+    </div>
+  </div>
+</div>
+{{/ iswx}}

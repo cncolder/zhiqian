@@ -146,13 +146,28 @@ app
   })
   .get('/poll/outlets', function * () {
     'Mozilla/5.0 (iPhone; CPU iPhone OS 8_1_2 like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) Mobile/12B440 MicroMessenger/6.1.4 NetType/WIFI'; // jshint ignore:line
-    if (/micromessenger/i.test(this.get('user-agent')) && !this.session.wx) {
+
+    var iswx = /micromessenger/i.test(this.get('user-agent'));
+
+    // not wechat client
+    if (!iswx) {
+      return yield this.render('layout', {
+        partials: {
+          content: 'poll/outlets'
+        },
+        iswx: iswx
+      });
+    }
+    
+    if (!this.session.wx || !this.session.wx.code) {
       var url = wechatOAuth.getAuthorizeURL(
         'http://haoduo.vitarn.com/wx/authorize', '/poll/outlets', 'snsapi_base'
       );
 
       return this.redirect(url);
     }
+    
+    delete this.session.wx.code;
 
     var wxid = this.session.wx.openid;
 
@@ -265,6 +280,7 @@ app
     });
 
     this.session.wx = {
+      code: code,
       openid: openid,
       userinfo: userinfo
     };
