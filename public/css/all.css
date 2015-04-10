@@ -9712,7 +9712,8 @@ body > .main {
 }
 /* NEWS
 -------------------------------------------------- */
-.news .row .col-md-12 .row {
+.news .container .row {
+  margin: 0;
   background: #ffffff url(/img/bg-news.png) repeat scroll top left;
 }
 .news .title {

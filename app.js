@@ -149,9 +149,9 @@ app
       });
     }
     
-    log(cache.outlets.map(function (o) {
-      return o.name;
-    }));
+    // log(cache.outlets.map(function (o) {
+    //   return o.name;
+    // }));
 
     var myvote = yield Vote.findOne({
       ip: ip

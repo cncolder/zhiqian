@@ -72,109 +72,103 @@
 <div class="news">
   <div class="container">
     <div class="row">
-      <div class="col-md-12">
-        
-        <div class="row">
-          <div class="col-lg-6">
-            <div class="title">
-              <img src="/img/title-trend.png" alt="好多动态">
+      <div class="col-lg-6">
+        <div class="title">
+          <img src="/img/title-trend.png" alt="好多动态">
+        </div>
+    
+        <div role="tabpanel">
+
+          <!-- Nav tabs -->
+          <ul class="nav nav-tabs nav-justified" role="tablist">
+            <li role="presentation" class="active"><a href="#" aria-controls=".trend" role="tab" data-toggle="tab">最新动态</a></li>
+            <li role="presentation"><a href="#" aria-controls=".media" role="tab" data-toggle="tab">媒体关注</a></li>
+            <li role="presentation"><a href="#" aria-controls=".photo" role="tab" data-toggle="tab">图片新闻</a></li>
+            <li role="presentation"><a href="#" aria-controls=".video" role="tab" data-toggle="tab">视频精选</a></li>
+          </ul>
+
+          <!-- Tab panes -->
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active trend">
+          
             </div>
-        
-            <div role="tabpanel">
-
-              <!-- Nav tabs -->
-              <ul class="nav nav-tabs nav-justified" role="tablist">
-                <li role="presentation" class="active"><a href="#" aria-controls=".trend" role="tab" data-toggle="tab">最新动态</a></li>
-                <li role="presentation"><a href="#" aria-controls=".media" role="tab" data-toggle="tab">媒体关注</a></li>
-                <li role="presentation"><a href="#" aria-controls=".photo" role="tab" data-toggle="tab">图片新闻</a></li>
-                <li role="presentation"><a href="#" aria-controls=".video" role="tab" data-toggle="tab">视频精选</a></li>
-              </ul>
-
-              <!-- Tab panes -->
-              <div class="tab-content">
-                <div role="tabpanel" class="tab-pane active trend">
-              
-                </div>
-                <div role="tabpanel" class="tab-pane media">
-              
-                </div>
-                <div role="tabpanel" class="tab-pane photo">
-              
-                </div>
-                <div role="tabpanel" class="tab-pane video">
-              
-                </div>
-              </div>
-
+            <div role="tabpanel" class="tab-pane media">
+          
+            </div>
+            <div role="tabpanel" class="tab-pane photo">
+          
+            </div>
+            <div role="tabpanel" class="tab-pane video">
+          
             </div>
           </div>
+
+        </div>
+      </div>
+
+      <div class="col-lg-6">
+        <div class="title">
+          <img src="/img/title-product.png" alt="产品展示">
+        </div>
     
-          <div class="col-lg-6">
-            <div class="title">
-              <img src="/img/title-product.png" alt="产品展示">
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+          <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingOne">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                  新书推荐
+                </a>
+              </h4>
             </div>
-        
-            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-              <div class="panel panel-default">
-                <div class="panel-heading" role="tab" id="headingOne">
-                  <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                      新书推荐
-                    </a>
-                  </h4>
-                </div>
-                <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-                  <div class="panel-body">
-                    新书推荐内容
-                  </div>
-                </div>
+            <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+              <div class="panel-body">
+                新书推荐内容
               </div>
-              <div class="panel panel-default">
-                <div class="panel-heading" role="tab" id="headingTwo">
-                  <h4 class="panel-title">
-                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                      重点图书
-                    </a>
-                  </h4>
-                </div>
-                <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-                  <div class="panel-body">
-                    重点图书内容
-                  </div>
-                </div>
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingTwo">
+              <h4 class="panel-title">
+                <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                  重点图书
+                </a>
+              </h4>
+            </div>
+            <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+              <div class="panel-body">
+                重点图书内容
               </div>
-              <div class="panel panel-default">
-                <div class="panel-heading" role="tab" id="headingThree">
-                  <h4 class="panel-title">
-                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                      好多童书
-                    </a>
-                  </h4>
-                </div>
-                <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-                  <div class="panel-body">
-                    好多童书内容
-                  </div>
-                </div>
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingThree">
+              <h4 class="panel-title">
+                <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                  好多童书
+                </a>
+              </h4>
+            </div>
+            <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+              <div class="panel-body">
+                好多童书内容
               </div>
-              <div class="panel panel-default">
-                <div class="panel-heading" role="tab" id="headingFour">
-                  <h4 class="panel-title">
-                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseThree">
-                      畅销图书
-                    </a>
-                  </h4>
-                </div>
-                <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
-                  <div class="panel-body">
-                    畅销图书内容
-                  </div>
-                </div>
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingFour">
+              <h4 class="panel-title">
+                <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseThree">
+                  畅销图书
+                </a>
+              </h4>
+            </div>
+            <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+              <div class="panel-body">
+                畅销图书内容
               </div>
             </div>
           </div>
         </div>
-        
       </div>
       
     </div>
