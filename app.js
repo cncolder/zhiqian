@@ -220,13 +220,12 @@ app
   })
   .get('/wx/authorize', function * () {
     var code = this.query.code;
-    log(code);
 
     wechatApi.getAccessToken(code, function(err, result) {
-      var accessToken = result.data.access_token;
-      var openid = result.data.openid;
+      // var accessToken = result.data.access_token;
+      // var openid = result.data.openid;
 
-      this.body = [code, accessToken, openid].join('\n');
+      this.body = [code, JSON.stringify(result)].join('\n\n');
     });
   });
 
