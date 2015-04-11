@@ -46,7 +46,9 @@ var options = {
 
   wechat: {
     id: 'wxfe7869827f87e1f8',
-    secret: '46ab238379501c7df5eff0318b9162b8'
+    secret: '46ab238379501c7df5eff0318b9162b8',
+    token: 'haoduotongshu',
+    aeskey: 'TbHRwPloxRMkUHnlDdPp2Pyz48SsAgFsabyoKaKdY9A'
   }
 };
 
@@ -97,11 +99,28 @@ app.use(require('koa-json')());
 // router
 
 var router = require('koa-router');
+
+// business logic
+
 var Vote = require('./models/vote');
+var wechat = require('co-wechat');
 var WechatOAuth = require('wechat-oauth');
 var wechatOAuth = new WechatOAuth(options.wechat.id, options.wechat.secret);
 var WechatAPI = require('wechat-api');
 var wechatApi = new WechatAPI(options.wechat.id, options.wechat.secret);
+
+app.use(wechat(options.wechat.token).middleware(function * () {
+  if (this.weixin.Event == 'subscribe') {
+    this.body = [
+      {
+        title: '测试',
+        description: '测试描述',
+        picurl: 'http://nodeapi.cloudfoundry.com/qrcode.jpg',
+        url: 'http://nodeapi.cloudfoundry.com/'
+      }
+    ];
+  }
+}));
 
 app
   .use(router(app))
