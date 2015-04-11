@@ -45,10 +45,10 @@ var options = {
   },
 
   wechat: {
-    id: 'wxfe7869827f87e1f8',
-    secret: '46ab238379501c7df5eff0318b9162b8',
+    appid: 'wxfe7869827f87e1f8',
+    appsecret: '46ab238379501c7df5eff0318b9162b8',
     token: 'haoduotongshu',
-    aeskey: 'TbHRwPloxRMkUHnlDdPp2Pyz48SsAgFsabyoKaKdY9A'
+    encodingAESKey: 'TbHRwPloxRMkUHnlDdPp2Pyz48SsAgFsabyoKaKdY9A'
   }
 };
 
@@ -105,22 +105,9 @@ var router = require('koa-router');
 var Vote = require('./models/vote');
 var wechat = require('co-wechat');
 var WechatOAuth = require('wechat-oauth');
-var wechatOAuth = new WechatOAuth(options.wechat.id, options.wechat.secret);
+var wechatOAuth = new WechatOAuth(options.wechat.appid, options.wechat.appsecret);
 var WechatAPI = require('wechat-api');
-var wechatApi = new WechatAPI(options.wechat.id, options.wechat.secret);
-
-app.use(wechat(options.wechat.token).middleware(function * () {
-  if (this.weixin.Event == 'subscribe') {
-    this.body = [
-      {
-        title: '测试',
-        description: '测试描述',
-        picurl: 'http://nodeapi.cloudfoundry.com/qrcode.jpg',
-        url: 'http://nodeapi.cloudfoundry.com/'
-      }
-    ];
-  }
-}));
+var wechatApi = new WechatAPI(options.wechat.appid, options.wechat.appsecret);
 
 app
   .use(router(app))
@@ -310,12 +297,17 @@ app
     } else {
       this.redirect('http://mp.weixin.qq.com/s?__biz=MjM5MTI2NDQxMg==&mid=204219959&idx=1&sn=981c14f1870156ffc33076c10b7dab7a#rd'); // jshint ignore:line
     }
-  })
-  .get('/wx/token', function * () {
-    this.body = this.query.echostr;
-  })
-  .post('/wx/token', function * () {
-    this.body = this.query.echostr;
   });
+
+app.use(wechat(options.wechat).middleware(function * () {
+  if (this.weixin.Event == 'subscribe') {
+    this.body = [{
+      title: '投票活动',
+      description: '我爱蓝天投票活动',
+      picurl: 'http://haoduo.vitarn.com/img/slide-outlets.png',
+      url: 'http://haoduo.vitarn.com/poll/outlets'
+    }];
+  }
+}));
 
 module.exports = app;

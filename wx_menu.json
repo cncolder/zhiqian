@@ -1,0 +1,49 @@
+{
+    "button": [
+        {
+            "name": "好多动态",
+            "sub_button": [
+                {
+                    "name": "好多活动",
+                    "type": "view",
+                    "url": "http://haoduo.vitarn.com"
+                },
+                {
+                    "name": "好多新书",
+                    "type": "view",
+                    "url": "http://haoduo.vitarn.com"
+                },
+                {
+                    "name": "好多优惠",
+                    "type": "view",
+                    "url": "http://haoduo.vitarn.com"
+                },
+                {
+                    "name": "好多专家",
+                    "type": "view",
+                    "url": "http://haoduo.vitarn.com"
+                },
+                {
+                    "name": "投票活动",
+                    "type": "view",
+                    "url": "http://haoduo.vitarn.com/poll/outlets"
+                }
+            ]
+        },
+        {
+            "type": "view",
+            "name": "买书",
+            "url": "http://kdt.im/gkEzc86X"
+        },
+        {
+            "name": "关于我们",
+            "sub_button": [
+                {
+                    "name": "了解&合作",
+                    "type": "click",
+                    "key": "about"
+                }
+            ]
+        }
+    ]
+}
