@@ -29,8 +29,10 @@ module.exports = function() {
   });
 
   // lazy load images
-  $('.poll img.lazy').lazyload({
-    effect: 'fadeIn'
+  $(function() {
+    $('.poll img.lazy').lazyload({
+      effect: 'fadeIn'
+    });
   });
 
   // copy select drawing data to modal
