@@ -46,7 +46,7 @@ module.exports = function() {
     $modal.find('.modal-title')
       .text(data.code + ' - ' + data.name);
     $modal.find('.modal-body img')
-      .attr('src', '/img/poll/outlets/800/' + data.code + ' ' + data.name + '.jpg');
+      .attr('src', 'http://123.57.151.44/img/poll/outlets/800/' + data.code + ' ' + data.name + '.jpg');
 
     $modal.data(data);
   });
