@@ -4,9 +4,7 @@ var animationend = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimation
 
 // lazy load images
 $(function() {
-  $('.poll img.lazy').lazyload({
-    effect: 'fadeIn'
-  });
+  $('img').unveil();
 });
 
 module.exports = function() {
