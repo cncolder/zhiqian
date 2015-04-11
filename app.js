@@ -65,9 +65,9 @@ app.use(require('koa-response-time')());
 
 // logger
 
-if (app.env == 'development') {
+// if (app.env == 'development') {
   app.use(require('koa-logger')(options.logger));
-}
+// }
 
 // compress
 
