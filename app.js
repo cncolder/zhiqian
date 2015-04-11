@@ -23,7 +23,7 @@ var options = {
 
   fileServer: {
     root: './public',
-    maxage: ms('7 days'),
+    maxage: ms('1 hour'),
     // index: 'index.html',
     // hidden: false,
     defer: false
