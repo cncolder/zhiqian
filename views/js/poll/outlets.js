@@ -13,7 +13,7 @@ module.exports = function() {
       var $el = $(el);
       var data = $el.data();
 
-      if (data.code.toString().includes(val) || data.name.includes(val)) {
+      if (~data.code.toString().indexOf(val) || ~data.name.indexOf(val)) {
         $el.show();
       } else {
         $el.hide();

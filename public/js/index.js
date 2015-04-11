@@ -3746,7 +3746,7 @@ $('.poster a').hover(function() {
 
 // outlets poll page
 var outlets = require('./poll/outlets');
-if (pathname.startsWith('/poll/outlets')) {
+if (!pathname.indexOf('/poll/outlets')) {
   outlets();
 }
 
@@ -3770,7 +3770,7 @@ module.exports = function() {
       var $el = $(el);
       var data = $el.data();
 
-      if (data.code.toString().includes(val) || data.name.includes(val)) {
+      if (~data.code.toString().indexOf(val) || ~data.name.indexOf(val)) {
         $el.show();
       } else {
         $el.hide();

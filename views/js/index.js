@@ -25,6 +25,6 @@ $('.poster a').hover(function() {
 
 // outlets poll page
 var outlets = require('./poll/outlets');
-if (pathname.startsWith('/poll/outlets')) {
+if (!pathname.indexOf('/poll/outlets')) {
   outlets();
 }

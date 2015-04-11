@@ -72,13 +72,13 @@ if (app.env == 'development') {
 
 app.use(require('koa-compress')(options.compress));
 
+// polyfills
+
+// app.use(require('koa-polyfills')(options.polyfills));
+
 // file server
 
 app.use(require('koa-static')(options.fileServer.root, options.fileServer));
-
-// polyfills
-
-app.use(require('koa-polyfills')(options.polyfills));
 
 // session
 
