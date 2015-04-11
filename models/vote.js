@@ -15,7 +15,6 @@ var schema = new mongoose.Schema({
 
   wxid: {
     type: String,
-    required: true,
     unique: true
   },
   
