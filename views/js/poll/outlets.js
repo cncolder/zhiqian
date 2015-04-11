@@ -1,5 +1,5 @@
 var log = require('../debug')('poll:outlets');
-var moment = require('../moment');
+// var moment = require('../moment');
 var animationend = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
 
 // lazy load images
@@ -77,9 +77,9 @@ module.exports = function() {
           $voteButton.addClass('hidden');
 
           var vote = JSON.parse(xhr.responseText);
-          var time = moment(vote.createdAt).fromNow();
+          // var time = moment(vote.createdAt).fromNow();
 
-          alert('您在' + time + '把票投给了' + vote.code + '号小朋友.');
+          alert('您已经把票投给了' + vote.code + '号小朋友.');
         } else {
           $voteButton.attr('disabled', false);
         }
