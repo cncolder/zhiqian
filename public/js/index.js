@@ -3759,6 +3759,13 @@ var log = require('../debug')('poll:outlets');
 var moment = require('../moment');
 var animationend = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
 
+// lazy load images
+$(function() {
+  $('.poll img.lazy').lazyload({
+    effect: 'fadeIn'
+  });
+});
+
 module.exports = function() {
   // search code or name
   var $searchInput = $('.poll input[type=search]');
@@ -3783,11 +3790,6 @@ module.exports = function() {
   // drawing order
   $('.poll span.badge').slice(0, 50).each(function(index, el) {
     $(el).text(index + 1);
-  });
-
-  // lazy load images
-  $('.poll img.lazy').lazyload({
-    effect: 'fadeIn'
   });
 
   // copy select drawing data to modal
