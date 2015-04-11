@@ -23,7 +23,7 @@ var options = {
 
   fileServer: {
     root: './public',
-    // maxage: ms('30 days'),
+    maxage: ms('7 days'),
     // index: 'index.html',
     // hidden: false,
     defer: false
@@ -47,7 +47,7 @@ var options = {
 
   wechat: {
     appid: 'wxfe7869827f87e1f8',
-    appsecret: '46ab238379501c7df5eff0318b9162b8',
+    secret: '46ab238379501c7df5eff0318b9162b8',
     token: 'haoduotongshu',
     encodingAESKey: 'TbHRwPloxRMkUHnlDdPp2Pyz48SsAgFsabyoKaKdY9A'
   }
@@ -66,7 +66,7 @@ app.use(require('koa-response-time')());
 // logger
 
 // if (app.env == 'development') {
-  app.use(require('koa-logger')(options.logger));
+app.use(require('koa-logger')(options.logger));
 // }
 
 // compress
@@ -104,11 +104,10 @@ var router = require('koa-router');
 // business logic
 
 var Vote = require('./models/vote');
-var wechat = require('co-wechat');
 var WechatOAuth = require('wechat-oauth');
-var wechatOAuth = new WechatOAuth(options.wechat.appid, options.wechat.appsecret);
+var wechatOAuth = new WechatOAuth(options.wechat.appid, options.wechat.secret);
 var WechatAPI = require('wechat-api');
-var wechatApi = new WechatAPI(options.wechat.appid, options.wechat.appsecret);
+var wechatApi = new WechatAPI(options.wechat.appid, options.wechat.secret);
 
 app
   .use(router(app))
@@ -300,15 +299,6 @@ app
     }
   });
 
-app.use(wechat(options.wechat).middleware(function * () {
-  if (this.weixin.Event == 'subscribe') {
-    this.body = [{
-      title: '投票活动',
-      description: '我爱蓝天投票活动',
-      picurl: 'http://haoduo.vitarn.com/img/slide-outlets.png',
-      url: 'http://haoduo.vitarn.com/poll/outlets'
-    }];
-  }
-}));
+app.use(require('./wechat')(options.wechat));
 
 module.exports = app;
