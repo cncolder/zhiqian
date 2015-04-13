@@ -5,23 +5,23 @@
             "sub_button": [
                 {
                     "name": "好多活动",
-                    "type": "view",
-                    "url": "http://haoduo.vitarn.com"
+                    "type": "click",
+                    "key": "event"
                 },
                 {
                     "name": "好多新书",
                     "type": "view",
-                    "url": "http://haoduo.vitarn.com"
+                    "url": "http://kdt.im/gkEzc86X"
                 },
                 {
                     "name": "好多优惠",
-                    "type": "view",
-                    "url": "http://haoduo.vitarn.com"
+                    "type": "click",
+                    "key": "coupon"
                 },
                 {
                     "name": "好多专家",
-                    "type": "view",
-                    "url": "http://haoduo.vitarn.com"
+                    "type": "click",
+                    "key": "expert"
                 },
                 {
                     "name": "投票活动",
@@ -31,8 +31,8 @@
             ]
         },
         {
-            "type": "view",
             "name": "买书",
+            "type": "view",
             "url": "http://kdt.im/gkEzc86X"
         },
         {
