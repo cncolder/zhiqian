@@ -235,6 +235,8 @@ app
     });
   })
   .post('/poll/outlets', function * () {
+    this.assert(/micromessenger/i.test(this.get('user-agent')), 403, 'wechat only');
+    
     var wxid = this.session.wx.openid;
     var ip = this.ip;
     var vote = yield Vote.findOne({
@@ -264,6 +266,8 @@ app
     }
   })
   .get('/wx/authorize', function * () {
+    this.assert(/micromessenger/i.test(this.get('user-agent')), 403, 'wechat only');
+    
     var code = this.query.code;
     var result = yield new Promise(function(resolve, reject) {
       wechatOAuth.getAccessToken(code, function(err, result) {
