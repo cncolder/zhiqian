@@ -1,6 +1,6 @@
 // require
 
-var log = require('./lib/debug')('app');
+var log = require('./lib/debug')('app'); // jshint ignore:line
 var ms = require('ms');
 
 // app
@@ -312,7 +312,7 @@ var reply = {
     url: 'http://haoduo.vitarn.com/poll/outlets'
   }],
   
-  about: '好多童书专业出版机构，成立于2009年。致力于高品质童书的策划与发行。坚持“以纯净的阅读，沉淀世界的喧嚣”的出版理念，出版图书涵盖家庭教育、少儿读物、人文社科、时尚娱乐、大众生活等多个领域。多年来好多童书不断挖掘品牌的精髓，注重将阅读重新带回纸质实体，享受将知识捧在手心里的感觉。\n咨询电话：0431-85575556',
+  about: '好多童书专业出版机构，成立于2009年。致力于高品质童书的策划与发行。坚持“以纯净的阅读，沉淀世界的喧嚣”的出版理念，出版图书涵盖家庭教育、少儿读物、人文社科、时尚娱乐、大众生活等多个领域。多年来好多童书不断挖掘品牌的精髓，注重将阅读重新带回纸质实体，享受将知识捧在手心里的感觉。\n咨询电话：0431-85575556', // jshint ignore:line
 
   smile: '^_^'
 };
@@ -333,7 +333,7 @@ app.use(wechat(options.wechat).middleware(function * () {
         });
         
         if (myvote) {
-          this.body = '感谢您参与投票活动, 您已经把票投给了' + myvote.code + '号小朋友, 附赠微商城10元优惠卷一张, 点击领取: http://wap.koudaitong.com/v2/showcase/coupon/fetch?alias=gtyzq20d';
+          this.body = '感谢您参与投票活动, 您已经把票投给了' + myvote.code + '号小朋友, 附赠微商城10元优惠卷一张, 点击领取: http://wap.koudaitong.com/v2/showcase/coupon/fetch?alias=gtyzq20d'; // jshint ignore:line
         } else {
           this.body = reply.vote;
         }
@@ -345,8 +345,10 @@ app.use(wechat(options.wechat).middleware(function * () {
         this.body = reply.vote;
       }
       
-      if (weixin.Event == 'about') {
-        this.body = reply.about;
+      if (weixin.Event == 'CLICK') {
+        if (weixin.EventKey == 'about') {
+          this.body = reply.about;
+        }
       }
       break;
 
