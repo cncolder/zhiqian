@@ -40,37 +40,37 @@ function * coupon(wxid) {
   return reply.vote;
 }
 
-function * text() {
-  if (/投票/.test(this.weixin.Content)) {
+function * text(weixin) {
+  if (/投票/.test(weixin.Content)) {
     return reply.vote;
   }
 
-  if (/优惠/.test(this.weixin.Content)) {
-    return yield coupon(this.weixin.FromUserName);
+  if (/优惠/.test(weixin.Content)) {
+    return yield coupon(weixin.FromUserName);
   }
 
   return reply.unknown;
 }
 
-function * event() {
-  if (this.weixin.Event == 'subscribe') {
+function * event(weixin) {
+  if (weixin.Event == 'subscribe') {
     return reply.vote;
   }
 
-  if (this.weixin.Event == 'CLICK') {
-    if (this.weixin.EventKey == 'event') {
+  if (weixin.Event == 'CLICK') {
+    if (weixin.EventKey == 'event') {
       return reply.event;
     }
 
-    if (this.weixin.EventKey == 'coupon') {
-      return yield coupon(this.weixin.FromUserName);
+    if (weixin.EventKey == 'coupon') {
+      return yield coupon(weixin.FromUserName);
     }
 
-    if (this.weixin.EventKey == 'expert') {
+    if (weixin.EventKey == 'expert') {
       return reply.expert;
     }
 
-    if (this.weixin.EventKey == 'about') {
+    if (weixin.EventKey == 'about') {
       return reply.about;
     }
   }
@@ -85,11 +85,11 @@ module.exports = function(options) {
 
     switch (MsgType) {
       case 'text':
-        this.body = yield text();
+        this.body = yield text(weixin);
         break;
 
       case 'event':
-        this.body = yield event();
+        this.body = yield event(weixin);
         break;
 
       default:
