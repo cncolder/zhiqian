@@ -34,7 +34,7 @@ var options = {
   },
 
   session: {
-
+    store: require('./models/mongoose').sessionStore
   },
 
   views: {
@@ -83,7 +83,7 @@ app.use(require('koa-static')(options.fileServer.root, options.fileServer));
 
 // session
 
-app.use(require('koa-session')(app, options.session));
+app.use(require('koa-generic-session')(options.session));
 
 // view renderer
 
