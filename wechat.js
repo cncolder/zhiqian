@@ -25,8 +25,16 @@ var reply = {
 
   about: '好多童书专业出版机构，成立于2009年。致力于高品质童书的策划与发行。坚持“以纯净的阅读，沉淀世界的喧嚣”的出版理念，出版图书涵盖家庭教育、少儿读物、人文社科、时尚娱乐、大众生活等多个领域。多年来好多童书不断挖掘品牌的精髓，注重将阅读重新带回纸质实体，享受将知识捧在手心里的感觉。\n咨询电话：0431-85575556', // jshint ignore:line
 
+  service: {
+    type: 'customerService'
+  },
+
   unknown: '[疑问]'
 };
+
+function * votecode(code) {
+  return '您是要投票给' + code + '号小朋友吗? [疑问] 投票地址在这里: http://haoduo.vitarn.com/poll/outlets'; // jshint ignore:line
+}
 
 function * coupon(wxid) {
   var myvote = yield Vote.findOne({
@@ -41,15 +49,26 @@ function * coupon(wxid) {
 }
 
 function * text(weixin) {
-  if (/投票/.test(weixin.Content)) {
+  var FromUserName = weixin.FromUserName;
+  var Content = weixin.Content;
+
+  if (/投票/.test(Content)) {
     return reply.vote;
   }
 
-  if (/优惠/.test(weixin.Content)) {
-    return yield coupon(weixin.FromUserName);
+  if (/优惠/.test(Content)) {
+    return yield coupon(FromUserName);
   }
 
-  return reply.unknown;
+  if (/^\d{3}$/.test(Content)) {
+    var number = parseInt(Content, 10);
+
+    if (number >= 101 && number <= 310) {
+      return votecode(Content);
+    }
+  }
+
+  return reply.service;
 }
 
 function * event(weixin) {
