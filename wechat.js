@@ -32,7 +32,7 @@ var reply = {
   unknown: '[疑问]'
 };
 
-function * votecode(code) {
+function votecode(code) {
   return '您是要投票给' + code + '号小朋友吗? [疑问] 投票地址在这里: http://haoduo.vitarn.com/poll/outlets'; // jshint ignore:line
 }
 
@@ -56,7 +56,7 @@ function * text(weixin) {
     return reply.vote;
   }
 
-  if (/优惠/.test(Content)) {
+  if (/优惠|奖品/.test(Content)) {
     return yield coupon(FromUserName);
   }
 
