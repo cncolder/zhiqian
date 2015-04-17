@@ -9740,29 +9740,6 @@ body > .main {
 }
 /* COMPANY
 -------------------------------------------------- */
-.company .container {
-  background: #ffffff url(/img/bg-business.jpg) no-repeat scroll top left;
-}
-.company ul.navlist li {
-  margin: 20px;
-}
-.company ul.navlist a {
-  color: gray;
-}
-.company ul.navlist a .glyphicon {
-  margin-right: 1em;
-  padding: 2px 2px;
-  color: white;
-  background-color: gray;
-  font-size: 40%;
-}
-.company ul.navlist a:hover {
-  color: orange;
-}
-.company ul.navlist a:hover .glyphicon {
-  color: white;
-  background-color: orange;
-}
 .company h3 {
   text-align: center;
 }
@@ -9819,9 +9796,60 @@ body > .main {
   .slide .carousel .carousel-indicators {
     display: none !important;
   }
+  .company .container,
+  .business .container,
+  .product .container {
+    background-color: transparent;
+  }
+  .company ul.navlist,
+  .business ul.navlist,
+  .product ul.navlist {
+    display: none !important;
+  }
 }
 @media (min-width: 768px) {
   .slide .carousel .carousel-indicators {
     display: block !important;
+  }
+  .company .container,
+  .business .container,
+  .product .container {
+    background: #ffffff url(/img/bg-business.jpg) no-repeat scroll top left;
+  }
+  .company ul.navlist,
+  .business ul.navlist,
+  .product ul.navlist {
+    display: block !important;
+    margin: 400px 30%;
+  }
+  .company ul.navlist li,
+  .business ul.navlist li,
+  .product ul.navlist li {
+    margin: 20px;
+  }
+  .company ul.navlist a,
+  .business ul.navlist a,
+  .product ul.navlist a {
+    color: gray;
+  }
+  .company ul.navlist a .glyphicon,
+  .business ul.navlist a .glyphicon,
+  .product ul.navlist a .glyphicon {
+    margin-right: 1em;
+    padding: 2px 2px;
+    color: white;
+    background-color: gray;
+    font-size: 40%;
+  }
+  .company ul.navlist a:hover,
+  .business ul.navlist a:hover,
+  .product ul.navlist a:hover {
+    color: orange;
+  }
+  .company ul.navlist a:hover .glyphicon,
+  .business ul.navlist a:hover .glyphicon,
+  .product ul.navlist a:hover .glyphicon {
+    color: white;
+    background-color: orange;
   }
 }

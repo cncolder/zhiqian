@@ -37,12 +37,12 @@ function votecode(code) {
 }
 
 function * coupon(wxid) {
-  var myvote = yield Vote.findOne({
+  var vote = yield Vote.findOne({
     wxid: wxid
   });
 
-  if (myvote) {
-    return '感谢您参与投票活动, 您已经把票投给了' + myvote.code + '号小朋友, 附赠微商城10元优惠卷一张, 点击领取: http://wap.koudaitong.com/v2/showcase/coupon/fetch?alias=gtyzq20d'; // jshint ignore:line 
+  if (vote) {
+    return '感谢您参与投票活动, 您已经把票投给了' + vote.code + '号小朋友, 附赠微商城10元优惠卷一张, 点击领取: http://wap.koudaitong.com/v2/showcase/coupon/fetch?alias=gtyzq20d'; // jshint ignore:line 
   }
 
   return reply.vote;

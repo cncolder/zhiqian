@@ -122,7 +122,8 @@ app
   .get('/company', function * () {
     yield this.render('layout', {
       partials: {
-        content: 'company'
+        content: 'company',
+        navlist: 'navlist'
       },
       title: '公司概况'
     });
@@ -130,7 +131,8 @@ app
   .get('/business', function * () {
     yield this.render('layout', {
       partials: {
-        content: 'business'
+        content: 'business',
+        navlist: 'navlist'
       },
       title: '经营业务'
     });
@@ -138,7 +140,8 @@ app
   .get('/product', function * () {
     yield this.render('layout', {
       partials: {
-        content: 'product'
+        content: 'product',
+        navlist: 'navlist'
       },
       title: '产品中心'
     });
