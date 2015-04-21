@@ -16,6 +16,13 @@ var reply = {
     url: 'http://mp.weixin.qq.com/s?__biz=MjM5MTI2NDQxMg==&mid=204204296&idx=1&sn=176069df18a9ef9f5ff211f35acfe769#rd' // jshint ignore:line
   }],
 
+  post: [{
+    title: '长春本地支持货到付款',
+    description: '长春市 朝阳区 西安大路2058号 绿地蓝海B座517室',
+    picurl: 'https://mmbiz.qlogo.cn/mmbiz/jgdTwKlhAIia39eFLu30YSwKJZ4lXzPFEU8krM5uxngg2XVsWt43g67Igh1XKMsGzOHMibCUVf2bQjjtGNunDvTQ/0', // jshint ignore:line
+    url: 'http://mp.weixin.qq.com/s?__biz=MjM5MTI2NDQxMg==&mid=204468117&idx=1&sn=22eea202afa13efdcaa9b2651d7858a2#rd' // jshint ignore:line
+  }],
+
   vote: [{
     title: '投票活动',
     description: '我爱蓝天投票活动',
@@ -87,6 +94,10 @@ function * event(weixin) {
 
     if (weixin.EventKey == 'expert') {
       return reply.expert;
+    }
+
+    if (weixin.EventKey == 'post') {
+      return reply.post;
     }
 
     if (weixin.EventKey == 'about') {

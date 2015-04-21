@@ -9,11 +9,6 @@
                     "key": "event"
                 },
                 {
-                    "name": "好多新书",
-                    "type": "view",
-                    "url": "http://kdt.im/gkEzc86X"
-                },
-                {
                     "name": "好多优惠",
                     "type": "click",
                     "key": "coupon"
@@ -22,6 +17,11 @@
                     "name": "好多专家",
                     "type": "click",
                     "key": "expert"
+                },
+                {
+                    "name": "货到付款",
+                    "type": "click",
+                    "key": "post"
                 },
                 {
                     "name": "投票活动",
