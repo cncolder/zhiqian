@@ -1,0 +1,10 @@
+{
+    "disallowSpacesInFunction": null,
+    "esnext": true,
+    "maximumLineLength": {
+        "allowComments": true,
+        "value": 80
+    },
+    "preset": "node-style-guide",
+    "requireCapitalizedComments": null
+}

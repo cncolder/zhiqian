@@ -1,6 +1,12 @@
-var log = require('../debug')('poll:outlets');
+var log = require('../debug')('poll:outlets'); // jshint ignore:line
 // var moment = require('../moment');
-var animationend = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
+var animationend = [
+  'webkitAnimationEnd',
+  'mozAnimationEnd',
+  'MSAnimationEnd',
+  'oanimationend',
+  'animationend',
+].join(' ');
 
 // lazy load images
 $(function() {
@@ -44,7 +50,9 @@ module.exports = function() {
     $modal.find('.modal-title')
       .text(data.code + ' - ' + data.name);
     $modal.find('.modal-body img')
-      .attr('src', 'http://123.57.151.44/img/poll/outlets/800/' + data.code + ' ' + data.name + '.jpg');
+      .attr('src',
+        'http://123.57.151.44/img/poll/outlets/800/' +
+        data.code + ' ' + data.name + '.jpg');
 
     $modal.data(data);
   });
@@ -54,7 +62,7 @@ module.exports = function() {
   $voteButton.click(function() {
     $voteButton.attr('disabled', true);
     $.post('/poll/outlets', {
-      code: $modal.data('code')
+      code: $modal.data('code'),
     })
       .then(function(vote) {
         $voteButton.addClass('hidden');
@@ -73,10 +81,21 @@ module.exports = function() {
           });
         });
       }, function(xhr) {
-        if (xhr.status == 409) {
+        var status = xhr.status;
+        var responseText = xhr.responseText;
+
+        if (status == 403) {
+          if (responseText == 'wechat only') {
+            alert('仅对微信用户开放.');
+          } else if (responseText == 'event finished') {
+            alert('活动已结束.');
+          } else {
+            alert(responseText);
+          }
+        } else if (status == 409) {
           $voteButton.addClass('hidden');
 
-          var vote = JSON.parse(xhr.responseText);
+          var vote = JSON.parse(responseText);
           // var time = moment(vote.createdAt).fromNow();
 
           alert('您已经把票投给了' + vote.code + '号小朋友.');

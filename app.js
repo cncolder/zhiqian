@@ -26,31 +26,31 @@ var options = {
     maxage: ms('1 hour'),
     // index: 'index.html',
     // hidden: false,
-    defer: false
+    defer: false,
   },
 
   polyfills: {
-    path: '/js/polyfill.js'
+    path: '/js/polyfill.js',
   },
 
   session: {
-    store: require('./models/mongoose').sessionStore
+    store: require('./models/mongoose').sessionStore,
   },
 
   views: {
     path: './views',
     default: 'html',
     map: {
-      html: 'hogan'
-    }
+      html: 'hogan',
+    },
   },
 
   wechat: {
     appid: 'wxfe7869827f87e1f8',
     secret: '46ab238379501c7df5eff0318b9162b8',
     token: 'haoduotongshu',
-    encodingAESKey: 'TbHRwPloxRMkUHnlDdPp2Pyz48SsAgFsabyoKaKdY9A'
-  }
+    encodingAESKey: 'TbHRwPloxRMkUHnlDdPp2Pyz48SsAgFsabyoKaKdY9A',
+  },
 };
 
 if (app.env == 'development') {
@@ -97,74 +97,142 @@ require('koa-body-parsers')(app);
 
 app.use(require('koa-json')());
 
+// wechat
+
+app.use(function * (next) {
+  // Mozilla/5.0 (iPhone; CPU iPhone OS 8_1_2 like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) Mobile/12B440 MicroMessenger/6.1.4 NetType/WIFI
+  this.iswx = /micromessenger/i.test(this.get('user-agent'));
+
+  yield next;
+});
+
 // router
 
 var router = require('koa-router');
+
 var Vote = require('./models/vote');
+
 var WechatOAuth = require('wechat-oauth');
 var wechatOAuth = new WechatOAuth(options.wechat.appid, options.wechat.secret);
 var WechatAPI = require('wechat-api');
 var wechatApi = new WechatAPI(options.wechat.appid, options.wechat.secret);
 
+var outletsDue = Date.parse('2015-05-02T00:00:00+0800');
+
 app
   .use(router(app))
   .get('/', function * () {
     this.state = {
-      title: '好多童书 - 知谦文化传播'
+      title: '好多童书 - 知谦文化传播',
     };
 
     yield this.render('layout', {
       partials: {
-        content: 'index'
-      }
+        content: 'index',
+      },
     });
   })
   .get('/company', function * () {
     yield this.render('layout', {
       partials: {
         content: 'company',
-        navlist: 'navlist'
+        navlist: 'navlist',
       },
-      title: '公司概况'
+      title: '公司概况',
     });
   })
   .get('/business', function * () {
     yield this.render('layout', {
       partials: {
         content: 'business',
-        navlist: 'navlist'
+        navlist: 'navlist',
       },
-      title: '经营业务'
+      title: '经营业务',
     });
   })
   .get('/product', function * () {
     yield this.render('layout', {
       partials: {
         content: 'product',
-        navlist: 'navlist'
+        navlist: 'navlist',
       },
-      title: '产品中心'
+      title: '产品中心',
     });
   })
   .get('/team', function * () {
     yield this.render('layout', {
       partials: {
-        content: 'team'
-      }
+        content: 'team',
+      },
     });
   })
   .get('/poll/outlets', function * () {
-    'Mozilla/5.0 (iPhone; CPU iPhone OS 8_1_2 like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) Mobile/12B440 MicroMessenger/6.1.4 NetType/WIFI'; // jshint ignore:line
+    if (!cache.outlets) {
+      var path = require('path');
+      var fs = require('mz/fs');
+      var imgs = yield fs.readdir('./public/img/poll/outlets/200');
 
-    var iswx = /micromessenger/i.test(this.get('user-agent'));
+      cache.outlets = imgs.filter(function(img) {
+        return path.extname(img) == '.jpg';
+      }).map(function(img) {
+        var arr = path.basename(img, '.jpg').split(/\s+/);
+        return {
+          code: arr[0],
+          name: arr[1],
+        };
+      });
+    }
+
+    var votes = yield Vote.aggregate()
+      .match({
+        category: 'outlets',
+      })
+      .group({
+        _id: '$code',
+        count: {
+          $sum: 1,
+        },
+      }).exec();
+
+    votes.forEach(function(vote) {
+      cache.outlets.find(function(option) {
+        return option.code == vote._id;
+      }).vote = vote.count;
+    });
+
+    // vote event has finished.
+    if (Date.now() > outletsDue) {
+      var options = cache.outlets
+        .sort(function(a, b) {
+          return (b.vote || 0) - (a.vote || 0);
+        })
+        .slice(0, 50)
+        .map(function(a) {
+          a.count = (a.vote || 0) + 20;
+          return a;
+        });
+
+      this.state = {
+        options: options,
+      };
+
+      yield this.render('layout', {
+        partials: {
+          content: 'poll/outlets-result',
+        },
+        title: '我爱蓝天投票活动获奖名单 - 好多童书',
+      });
+
+      return;
+    }
 
     // not wechat client
-    if (!iswx) {
+    if (!this.iswx) {
       return yield this.render('layout', {
         partials: {
-          content: 'poll/outlets'
+          content: 'poll/outlets',
         },
-        iswx: iswx
+        iswx: this.iswx,
       });
     }
 
@@ -179,26 +247,10 @@ app
     delete this.session.wx.code;
 
     var wxid = this.session.wx.openid;
-
-    if (!cache.outlets) {
-      var path = require('path');
-      var fs = require('mz/fs');
-      var imgs = yield fs.readdir('./public/img/poll/outlets/200');
-
-      cache.outlets = imgs.filter(function(img) {
-        return path.extname(img) == '.jpg';
-      }).map(function(img) {
-        var arr = path.basename(img, '.jpg').split(/\s+/);
-        return {
-          code: arr[0],
-          name: arr[1]
-        };
-      });
-    }
-
     var myvote = yield Vote.findOne({
-      wxid: wxid
+      wxid: wxid,
     });
+
     if (myvote) {
       myvote = myvote.toJSON();
       myvote.name = cache.outlets.find(function(item) {
@@ -206,45 +258,29 @@ app
       }).name;
     }
 
-    var votes = yield Vote.aggregate()
-      .match({
-        category: 'outlets'
-      })
-      .group({
-        _id: '$code',
-        count: {
-          $sum: 1
-        }
-      }).exec();
-
-    votes.forEach(function(vote) {
-      cache.outlets.find(function(option) {
-        return option.code == vote._id;
-      }).vote = vote.count;
-    });
-
     this.state = {
       myvote: myvote,
       options: cache.outlets.sort(function(a, b) {
         return (b.vote || 0) - (a.vote || 0);
-      })
+      }),
     };
 
     yield this.render('layout', {
       partials: {
-        content: 'poll/outlets'
+        content: 'poll/outlets',
       },
       title: '我爱蓝天儿童现场绘画活动投票 - 好多童书',
-      iswx: iswx
+      iswx: this.iswx,
     });
   })
   .post('/poll/outlets', function * () {
-    this.assert(/micromessenger/i.test(this.get('user-agent')), 403, 'wechat only');
+    this.assert(this.iswx, 403, 'wechat only');
+    this.assert(Date.now() < outletsDue, 403, 'event finished');
 
     var wxid = this.session.wx.openid;
     var ip = this.ip;
     var vote = yield Vote.findOne({
-      wxid: wxid
+      wxid: wxid,
     });
 
     this.assert(!vote, 409, JSON.stringify(vote));
@@ -254,7 +290,7 @@ app
       category: 'outlets',
       code: body.code,
       wxid: wxid,
-      ip: ip
+      ip: ip,
     });
     this.body = vote;
   })
@@ -264,13 +300,13 @@ app
     } else {
       yield this.render('layout', {
         partials: {
-          content: 'wechat'
-        }
+          content: 'wechat',
+        },
       });
     }
   })
   .get('/wx/authorize', function * () {
-    this.assert(/micromessenger/i.test(this.get('user-agent')), 403, 'wechat only');
+    this.assert(this.iswx, 403, 'wechat only');
 
     var code = this.query.code;
     var result = yield new Promise(function(resolve, reject) {
@@ -297,13 +333,18 @@ app
     this.session.wx = {
       code: code,
       openid: openid,
-      userinfo: userinfo
+      userinfo: userinfo,
     };
+
+    var subscribeGuide = 'http://mp.weixin.qq.com/s' +
+      '?__biz=MjM5MTI2NDQxMg==' +
+      '&mid=204219959&idx=1' +
+      '&sn=981c14f1870156ffc33076c10b7dab7a#rd';
 
     if (userinfo.subscribe) {
       this.redirect(this.query.state);
     } else {
-      this.redirect('http://mp.weixin.qq.com/s?__biz=MjM5MTI2NDQxMg==&mid=204219959&idx=1&sn=981c14f1870156ffc33076c10b7dab7a#rd'); // jshint ignore:line
+      this.redirect(subscribeGuide);
     }
   });
 

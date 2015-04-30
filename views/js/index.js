@@ -35,6 +35,7 @@ $('.poster a').hover(function() {
 
 // outlets poll page
 var outlets = require('./poll/outlets');
+// must start with, why i wrote like this!
 if (!pathname.indexOf('/poll/outlets')) {
   outlets();
 }

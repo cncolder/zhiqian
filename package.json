@@ -81,7 +81,6 @@
         "gulp-less": "^3.0.2",
         "gulp-sourcemaps": "^1.5.1",
         "gulp-util": "^3.0.4",
-        "pm2": "^0.12.10",
         "vinyl-transform": "^1.0.0",
         "webot-cli": "0.0.11"
     },
@@ -98,7 +97,7 @@
         "url": "https://github.com/cncolder/zhiqian.git"
     },
     "scripts": {
-        "deploy": "`npm bin`/pm2 deploy package.json production",
+        "deploy": "pm2 deploy package.json production",
         "start": "node --harmony .",
         "test": "echo \"Error: no test specified\" && exit 1"
     },

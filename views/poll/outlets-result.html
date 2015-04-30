@@ -1,0 +1,42 @@
+<div class="hidden">
+  <img src="/img/slide-outlets.jpg" alt="微信缩略图">
+</div>
+
+<div class="poll">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="input-group">
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+          </span>
+          <input class="form-control input-lg" type="search" placeholder="搜索姓名或编号...">
+        </div>
+      </div>
+    </div>
+    
+    <div class="row">
+      {{# options}}
+      <div class="col-xs-12 col-md-6 col-lg-4 drawing"
+        data-code="{{code}}" data-name="{{name}}" data-vote="{{vote}}">
+        <div class="thumbnail">
+          <img class="img-responsive"
+            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC"
+              data-src="http://123.57.151.44/img/poll/outlets/800/{{code}} {{name}}.jpg" alt="{{name}}"
+              width="350" height="234">
+          <span class="badge">{{index}}</span>
+          <h4><span class="label label-default name">{{code}} - {{name}}</span></h4>
+          {{# count}}
+          <h4>
+            <span class="label label-default vote">
+              <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+              {{count}}
+            </span>
+          </h4>
+          {{/ count}}
+        </div>
+      </div>
+      {{/ options}}
+    </div>
+  </div>
+</div>

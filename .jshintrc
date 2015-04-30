@@ -12,12 +12,8 @@
         "locale": true,
         "mongoose": true
     },
-    "indent": 2,
     "jquery": true,
     "latedef": "nofunc",
-    "maxdepth": 3,
-    "maxlen": 100,
-    "maxparams": 4,
     "mocha": true,
     "newcap": true,
     "node": true,
