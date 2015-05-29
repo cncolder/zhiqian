@@ -51,7 +51,7 @@ module.exports = function() {
       .text(data.code + ' - ' + data.name);
     $modal.find('.modal-body img')
       .attr('src',
-        'http://123.57.151.44/img/poll/outlets/800/' +
+        '/img/poll/outlets/800/' +
         data.code + ' ' + data.name + '.jpg');
 
     $modal.data(data);
