@@ -97,7 +97,7 @@
         "url": "https://github.com/cncolder/zhiqian.git"
     },
     "scripts": {
-        "deploy": "pm2 deploy package.json production",
+        "deploy": "pm2 deploy package.json dg",
         "start": "node --harmony .",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
