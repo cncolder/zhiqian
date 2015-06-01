@@ -99,7 +99,7 @@ app.use(require('koa-json')());
 
 // wechat
 
-app.use(function * (next) {
+app.use(function*(next) {
   // Mozilla/5.0 (iPhone; CPU iPhone OS 8_1_2 like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) Mobile/12B440 MicroMessenger/6.1.4 NetType/WIFI
   this.iswx = /micromessenger/i.test(this.get('user-agent'));
 
@@ -121,7 +121,7 @@ var outletsDue = Date.parse('2015-05-02T00:00:00+0800');
 
 app
   .use(router(app))
-  .get('/', function * () {
+  .get('/', function*() {
     this.state = {
       title: '好多童书 - 知谦文化传播',
     };
@@ -132,7 +132,7 @@ app
       },
     });
   })
-  .get('/company', function * () {
+  .get('/company', function*() {
     yield this.render('layout', {
       partials: {
         content: 'company',
@@ -141,7 +141,7 @@ app
       title: '公司概况',
     });
   })
-  .get('/business', function * () {
+  .get('/business', function*() {
     yield this.render('layout', {
       partials: {
         content: 'business',
@@ -150,7 +150,7 @@ app
       title: '经营业务',
     });
   })
-  .get('/product', function * () {
+  .get('/product', function*() {
     yield this.render('layout', {
       partials: {
         content: 'product',
@@ -159,14 +159,14 @@ app
       title: '产品中心',
     });
   })
-  .get('/team', function * () {
+  .get('/team', function*() {
     yield this.render('layout', {
       partials: {
         content: 'team',
       },
     });
   })
-  .get('/poll/outlets', function * () {
+  .get('/poll/outlets', function*() {
     if (!cache.outlets) {
       var path = require('path');
       var fs = require('mz/fs');
@@ -273,7 +273,7 @@ app
       iswx: this.iswx,
     });
   })
-  .post('/poll/outlets', function * () {
+  .post('/poll/outlets', function*() {
     this.assert(this.iswx, 403, 'wechat only');
     this.assert(Date.now() < outletsDue, 403, 'event finished');
 
@@ -294,7 +294,7 @@ app
     });
     this.body = vote;
   })
-  .get('/wechat', function * () {
+  .get('/wechat', function*() {
     if (/micromessenger/i.test(this.get('user-agent'))) {
       yield this.render('wechat.m.html');
     } else {
@@ -305,7 +305,7 @@ app
       });
     }
   })
-  .get('/wx/authorize', function * () {
+  .get('/wx/authorize', function*() {
     this.assert(this.iswx, 403, 'wechat only');
 
     var code = this.query.code;
@@ -346,6 +346,13 @@ app
     } else {
       this.redirect(subscribeGuide);
     }
+  })
+  .get('/privacy', function*() {
+    yield this.render('layout', {
+      partials: {
+        content: 'privacy',
+      },
+    });
   });
 
 // wechat
