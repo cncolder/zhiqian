@@ -9793,6 +9793,9 @@ body > .main {
   margin: 0;
   padding: 15px 0;
 }
+.app .container > .row {
+  margin: 20px 0px;
+}
 /* RESPONSIVE
 -------------------------------------------------- */
 @media (min-width: 320px) {

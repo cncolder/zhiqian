@@ -81,6 +81,10 @@ app.use(require('koa-compress')(options.compress));
 
 app.use(require('koa-static')(options.fileServer.root, options.fileServer));
 
+// cros
+
+app.use(require('koa-cors')());
+
 // session
 
 app.use(require('koa-generic-session')(options.session));
@@ -346,6 +350,13 @@ app
     } else {
       this.redirect(subscribeGuide);
     }
+  })
+  .get('/app/finddiff', function*() {
+    yield this.render('layout', {
+      partials: {
+        content: 'app/finddiff',
+      },
+    });
   })
   .get('/privacy', function*() {
     yield this.render('layout', {

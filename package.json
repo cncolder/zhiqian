@@ -38,6 +38,7 @@
         "koa": "0.19.0",
         "koa-body-parsers": "^1.0.0",
         "koa-compress": "^1.0.8",
+        "koa-cors": "^0.0.14",
         "koa-generic-session": "^1.8.0",
         "koa-generic-session-mongo": "^0.1.1",
         "koa-json": "^1.1.1",
