@@ -356,6 +356,7 @@ app
       partials: {
         content: 'app/finddiff',
       },
+      title: '找不同 - 宝宝奇趣 - App 下载 - 好多童书 - 知谦文化传播',
     });
   })
   .get('/privacy', function*() {
