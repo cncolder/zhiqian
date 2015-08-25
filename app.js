@@ -170,17 +170,19 @@ app
       },
     });
   })
-  .get('/pospal', function*() {
-    if (this.hostname == 'bao--bao.com') {
-      var url = [
-        'http://',
-        this.query.shop,
-        '.pospal.cn/m?qrc=',
-        this.query.addr,
-      ].join('');
-
-      return this.redirect(url);
+  .get('/pospal', function*(next) {
+    if (this.hostname != 'bao--bao.com') {
+      return yield next;
     }
+
+    var url = [
+      'http://',
+      this.query.shop,
+      '.pospal.cn/m?qrc=',
+      this.query.addr,
+    ].join('');
+
+    return this.redirect(url);
   })
   .get('/poll/outlets', function*() {
     if (!cache.outlets) {

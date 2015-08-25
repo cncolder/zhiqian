@@ -7,12 +7,13 @@
                 "MONGOOSE_DISABLE_STABILITY_WARNING": 1,
                 "MONGO_URL": "mongodb://127.0.0.1:27017/zhiqian?auto_reconnect=true",
                 "NODE_ENV": "development",
+                "HOST": "0.0.0.0",
                 "PORT": 3000
             },
             "env_production": {
                 "DEBUG": "",
                 "NODE_ENV": "production",
-                "PORT": 80
+                "PORT": 3001
             },
             "ignore_watch": [
                 "[\\/\\\\]\\./",

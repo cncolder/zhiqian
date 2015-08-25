@@ -5,7 +5,7 @@ if (module.parent) {
   module.exports = app;
 } else {
   var http = require('http');
-  var host = '0.0.0.0';
+  var host = process.env.HOST || 'localhost';
   var port = parseInt(process.env.PORT || 3000, 10);
   var server = http.createServer(app.callback());
 
