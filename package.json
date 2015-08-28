@@ -4,14 +4,15 @@
             "env": {
                 "DEBUG": "koa*,mongoose*,app*",
                 "DEBUG_COLORS": 1,
+                "HOST": "0.0.0.0",
                 "MONGOOSE_DISABLE_STABILITY_WARNING": 1,
                 "MONGO_URL": "mongodb://127.0.0.1:27017/zhiqian?auto_reconnect=true",
                 "NODE_ENV": "development",
-                "HOST": "0.0.0.0",
                 "PORT": 3000
             },
             "env_production": {
                 "DEBUG": "",
+                "HOST": "",
                 "NODE_ENV": "production",
                 "PORT": 3001
             },
@@ -59,7 +60,7 @@
     "deploy": {
         "aliyun": {
             "host": "haoduotongshu.com",
-            "path": "/root/haoduotongshu.com",
+            "path": "/www/haoduotongshu.com",
             "post-deploy": "npm i --production && pm2 startOrRestart package.json --env production",
             "ref": "origin/master",
             "repo": "https://github.com/cncolder/zhiqian.git",
