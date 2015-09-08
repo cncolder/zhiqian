@@ -24,7 +24,6 @@
             ],
             "instances": "1",
             "name": "zhiqian",
-            "node_args": "--harmony",
             "script": ".",
             "watch": false
         }
@@ -101,7 +100,7 @@
     },
     "scripts": {
         "deploy": "pm2 deploy package.json aliyun",
-        "start": "node --harmony .",
+        "start": "node .",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "version": "1.0.0"
